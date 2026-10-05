@@ -3,13 +3,16 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CvData {
     pub version: u32,
+
     pub name: String,
     pub title: String,
     pub description: String,
+
     pub age_display: Option<String>,
     pub location: Option<String>,
     pub email: Option<String>,
     pub links: Vec<Link>,
+
     pub projects: Vec<Project>,
     pub experience: Vec<Experience>,
     pub education: Vec<Education>,
