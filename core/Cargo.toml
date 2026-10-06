@@ -13,6 +13,8 @@ mestra-core = { git = "https://github.com/M4elstr0m/Mestra", rev = "core-v0.1.0"
 rand_core = "0.10.1"
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.151"
+serde_with = "3.24.0"
 tera = "2.4.0"
 thiserror = "2.0.21"
 tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros", "sync"] }
+toml = "1.1.6"
