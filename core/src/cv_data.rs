@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize};
 
+mod error;
+pub use error::Error;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CvData {
     pub version: u32,
@@ -72,4 +75,10 @@ pub struct SkillGroup {
 pub struct LanguageSkill {
     pub name: String,
     pub level: String,
+}
+
+impl CvData {
+    pub(crate) fn content_hash(&self) -> Result<blake3::Hash, Error> {
+        Ok(blake3::hash(&serde_json::to_vec(self)?))
+    }
 }

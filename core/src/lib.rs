@@ -1,6 +1,6 @@
 // #![warn(missing_docs)]
 
-pub mod data;
+pub mod cv_data;
 pub mod preferences;
 pub mod profile;
 
