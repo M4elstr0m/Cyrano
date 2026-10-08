@@ -1,0 +1,78 @@
+use zeroize::Zeroizing;
+
+use super::Error;
+use crate::crypto;
+use crate::cv_data::CvData;
+use std::path::PathBuf;
+
+pub struct UnlockedProfile {
+    // Identity
+    name: String,
+    path: PathBuf,
+
+    // Data
+    data: CvData,
+    initial_data_hash: blake3::Hash,
+
+    // Security
+    salt: crypto::Salt,
+    key: Zeroizing<crypto::DerivedKey>,
+}
+
+impl UnlockedProfile {
+    pub(super) fn new(
+        name: String,
+        path: PathBuf,
+        data: CvData,
+        salt: crypto::Salt,
+        key: Zeroizing<crypto::DerivedKey>,
+    ) -> Result<Self, Error> {
+        let initial_data_hash = data.content_hash()?;
+
+        Ok(UnlockedProfile {
+            name,
+            path,
+            data,
+            initial_data_hash,
+            salt,
+            key,
+        })
+    }
+
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn data(&self) -> &CvData {
+        &self.data
+    }
+
+    pub fn data_mut(&mut self) -> &mut CvData {
+        &mut self.data
+    }
+
+    fn refresh_data_hash(&mut self) -> Result<(), Error> {
+        self.initial_data_hash = self.data.content_hash()?;
+
+        Ok(())
+    }
+
+    pub fn is_modified(&self) -> Result<bool, Error> {
+        Ok(self.data.content_hash()? != self.initial_data_hash)
+    }
+
+    pub fn save(&mut self) -> Result<(), Error> {
+        let plaintext = self.data.to_bytes()?;
+        let key_blob = crypto::encrypt_with_key(&self.key, &plaintext)?;
+
+        let mut blob = Vec::with_capacity(self.salt.len() + key_blob.len());
+        blob.extend_from_slice(&self.salt);
+        blob.extend_from_slice(&key_blob);
+
+        std::fs::write(super::data_path(&self.path), blob)?;
+
+        self.refresh_data_hash()?;
+
+        Ok(())
+    }
+}

@@ -81,4 +81,12 @@ impl CvData {
     pub(crate) fn content_hash(&self) -> Result<blake3::Hash, Error> {
         Ok(blake3::hash(&serde_json::to_vec(self)?))
     }
+
+    pub(crate) fn to_bytes(&self) -> Result<Vec<u8>, Error> {
+        Ok(serde_json::to_vec(self)?)
+    }
+
+    pub(crate) fn from_bytes(bytes: &[u8]) -> Result<Self, Error> {
+        Ok(serde_json::from_slice(bytes)?)
+    }
 }
