@@ -12,10 +12,14 @@ pub use error::Error;
 mod store;
 pub use store::ProfileStore as Store;
 
-fn data_path(root: &Path) -> PathBuf {
-    root.join("data.bin")
+fn data_path(profile_dir: &Path) -> PathBuf {
+    profile_dir.join("data.bin")
 }
 
-fn assets_dir(root: &Path) -> PathBuf {
-    root.join("assets")
+fn assets_dir(profile_dir: &Path) -> PathBuf {
+    profile_dir.join("assets")
+}
+
+fn identity_marker_path(profile_dir: &Path) -> PathBuf {
+    profile_dir.join("IDENTITY.cyrano")
 }
