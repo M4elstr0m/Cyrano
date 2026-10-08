@@ -75,4 +75,22 @@ impl UnlockedProfile {
 
         Ok(())
     }
+
+    pub fn save_asset(&self, filename: &str, bytes: &[u8]) -> Result<(), Error> {
+        let assets_dir = super::assets_dir(&self.path);
+
+        std::fs::create_dir_all(&assets_dir)?;
+
+        let blob = crypto::encrypt_with_key(&self.key, bytes)?;
+
+        std::fs::write(assets_dir.join(filename), blob)?;
+
+        Ok(())
+    }
+
+    pub fn load_asset(&self, filename: &str) -> Result<Vec<u8>, Error> {
+        let blob = std::fs::read(super::assets_dir(&self.path).join(filename))?;
+
+        Ok(crypto::decrypt_with_key(&self.key, &blob)?)
+    }
 }
