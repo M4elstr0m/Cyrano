@@ -7,7 +7,7 @@ pub enum Error {
     Io(#[from] std::io::Error),
 
     #[error("profile data is corrupted or truncated")]
-    InvalidData,
+    CorruptedProfileFile,
 
     #[error(transparent)]
     Crypto(#[from] crate::crypto::Error),

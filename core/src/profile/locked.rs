@@ -19,11 +19,13 @@ impl LockedProfile {
         let blob = std::fs::read(super::data_path(&self.path))?;
 
         if blob.len() < crypto::SALT_LEN {
-            return Err(Error::InvalidData);
+            return Err(Error::CorruptedProfileFile);
         }
 
         let (salt_bytes, rest) = blob.split_at(crypto::SALT_LEN);
-        let salt: crypto::Salt = salt_bytes.try_into().map_err(|_| Error::InvalidData)?;
+        let salt: crypto::Salt = salt_bytes
+            .try_into()
+            .map_err(|_| Error::CorruptedProfileFile)?;
 
         let key = crypto::derive_key(password, &salt)?;
 
