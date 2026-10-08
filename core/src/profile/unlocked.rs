@@ -1,6 +1,6 @@
 use zeroize::Zeroizing;
 
-use super::Error;
+use super::{Error, LockedProfile};
 use crate::crypto;
 use crate::cv_data::CvData;
 use std::path::PathBuf;
@@ -59,6 +59,10 @@ impl UnlockedProfile {
 
     pub fn is_modified(&self) -> Result<bool, Error> {
         Ok(self.data.content_hash()? != self.initial_data_hash)
+    }
+
+    pub fn lock(self) -> LockedProfile {
+        LockedProfile::new(self.name, self.path)
     }
 
     pub fn save(&mut self) -> Result<(), Error> {
