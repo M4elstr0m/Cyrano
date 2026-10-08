@@ -1,13 +1,13 @@
 use zeroize::Zeroizing;
 
-use super::{Error, LockedProfile};
+use super::{Error, Identity, LockedProfile};
 use crate::crypto;
 use crate::cv_data::CvData;
 use std::path::PathBuf;
 
 pub struct UnlockedProfile {
     // Identity
-    name: String,
+    identity: Identity,
     path: PathBuf,
 
     // Data
@@ -21,7 +21,7 @@ pub struct UnlockedProfile {
 
 impl UnlockedProfile {
     pub(super) fn new(
-        name: String,
+        identity: Identity,
         path: PathBuf,
         data: CvData,
         salt: crypto::Salt,
@@ -30,7 +30,7 @@ impl UnlockedProfile {
         let initial_data_hash = data.content_hash()?;
 
         Ok(UnlockedProfile {
-            name,
+            identity,
             path,
             data,
             initial_data_hash,
@@ -39,8 +39,8 @@ impl UnlockedProfile {
         })
     }
 
-    pub fn name(&self) -> &str {
-        &self.name
+    pub fn identity(&self) -> &Identity {
+        &self.identity
     }
 
     pub fn data(&self) -> &CvData {
@@ -62,7 +62,7 @@ impl UnlockedProfile {
     }
 
     pub fn lock(self) -> LockedProfile {
-        LockedProfile::new(self.name, self.path)
+        LockedProfile::new(self.identity, self.path)
     }
 
     pub fn save(&mut self) -> Result<(), Error> {

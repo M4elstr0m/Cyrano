@@ -1,18 +1,18 @@
 use crate::{crypto, cv_data::CvData};
 
-use super::{Error, UnlockedProfile};
+use super::{Error, Identity, UnlockedProfile};
 use std::path::PathBuf;
 
 pub struct LockedProfile {
     // Identity
-    name: String,
-    /// Directory containing a profile (data files & assets folder)
+    identity: Identity,
+    /// Directory containing a profile
     path: PathBuf,
 }
 
 impl LockedProfile {
-    pub fn new(name: String, path: PathBuf) -> Self {
-        Self { name, path }
+    pub fn new(identity: Identity, path: PathBuf) -> Self {
+        Self { identity, path }
     }
 
     pub fn unlock(&self, password: &str) -> Result<UnlockedProfile, Error> {
@@ -32,6 +32,6 @@ impl LockedProfile {
         let plaintext = crypto::decrypt_with_key(&key, rest)?;
         let data = CvData::from_bytes(&plaintext)?;
 
-        UnlockedProfile::new(self.name.clone(), self.path.clone(), data, salt, key)
+        UnlockedProfile::new(self.identity.clone(), self.path.clone(), data, salt, key)
     }
 }

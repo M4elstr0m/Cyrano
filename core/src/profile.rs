@@ -10,7 +10,10 @@ mod error;
 pub use error::Error;
 
 mod store;
-pub use store::ProfileStore as Store;
+pub use store::Store;
+
+mod identity;
+pub use identity::Identity;
 
 fn data_path(profile_dir: &Path) -> PathBuf {
     profile_dir.join("data.bin")
