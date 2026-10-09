@@ -24,4 +24,7 @@ pub enum Error {
     // mostly because no valid name
     #[error("profile's identity is corrupted or malformed")]
     InvalidIdentity,
+
+    #[error("no profile was found at this location")]
+    NotFound,
 }

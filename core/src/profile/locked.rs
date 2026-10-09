@@ -1,22 +1,24 @@
 use crate::{crypto, cv_data::CvData};
 
 use super::{Error, Identity, UnlockedProfile};
-use std::path::PathBuf;
+use std::path::Path;
 
 pub struct LockedProfile {
     // Identity
     identity: Identity,
-    /// Directory containing a profile
-    path: PathBuf,
 }
 
 impl LockedProfile {
-    pub fn new(identity: Identity, path: PathBuf) -> Self {
-        Self { identity, path }
+    pub fn new(identity: Identity) -> Self {
+        Self { identity }
     }
 
-    pub fn unlock(&self, password: &str) -> Result<UnlockedProfile, Error> {
-        let blob = std::fs::read(super::data_path(&self.path))?;
+    pub(super) fn unlock(
+        &self,
+        profile_dir: &Path,
+        password: &str,
+    ) -> Result<UnlockedProfile, Error> {
+        let blob = std::fs::read(super::data_path(profile_dir))?;
 
         if blob.len() < crypto::SALT_LEN {
             return Err(Error::CorruptedProfileFile);
@@ -32,6 +34,6 @@ impl LockedProfile {
         let plaintext = crypto::decrypt_with_key(&key, rest)?;
         let data = CvData::from_bytes(&plaintext)?;
 
-        UnlockedProfile::new(self.identity.clone(), self.path.clone(), data, salt, key)
+        UnlockedProfile::new(self.identity.clone(), data, salt, key)
     }
 }
