@@ -48,6 +48,20 @@ impl Store {
         ))
     }
 
+    pub fn all_locked(&self) -> Vec<(&Path, &LockedProfile)> {
+        self.locked
+            .iter()
+            .map(|(path, profile)| (path.as_path(), profile))
+            .collect()
+    }
+
+    pub fn all_unlocked(&self) -> Vec<(&Path, &UnlockedProfile)> {
+        self.unlocked
+            .iter()
+            .map(|(path, profile)| (path.as_path(), profile))
+            .collect()
+    }
+
     pub fn locked(&self, profile_dir: &Path) -> Option<&LockedProfile> {
         self.locked.get(profile_dir)
     }
