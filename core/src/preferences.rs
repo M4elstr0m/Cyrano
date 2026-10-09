@@ -21,7 +21,7 @@ fn app_directory() -> Result<ProjectDirs, Error> {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(default)]
 pub struct Preferences {
-    profiles_path: Option<PathBuf>,
+    profiles_dir: Option<PathBuf>,
 }
 
 impl Preferences {
@@ -47,8 +47,8 @@ impl Preferences {
         Ok(())
     }
 
-    pub fn profiles_path(&self) -> Result<PathBuf, Error> {
-        match &self.profiles_path {
+    pub fn profiles_dir(&self) -> Result<PathBuf, Error> {
+        match &self.profiles_dir {
             Some(p) => Ok(p.clone()),
             None => Ok(app_directory()?.data_dir().join("profiles")),
         }
