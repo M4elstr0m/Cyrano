@@ -4,6 +4,9 @@ pub enum Error {
     Io(#[from] std::io::Error),
 
     #[error(transparent)]
+    Time(#[from] std::time::SystemTimeError),
+
+    #[error(transparent)]
     Parse(#[from] toml::de::Error),
 
     #[error(transparent)]

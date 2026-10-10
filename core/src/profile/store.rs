@@ -1,3 +1,5 @@
+use crate::{crypto, cv_data::CvData};
+
 use super::{Error, Identity, LockedProfile, UnlockedProfile};
 use std::{
     collections::HashMap,
@@ -5,19 +7,20 @@ use std::{
 };
 
 pub struct Store {
+    profiles_dir: PathBuf,
     locked: HashMap<PathBuf, LockedProfile>,
     unlocked: HashMap<PathBuf, UnlockedProfile>,
 }
 
 impl Store {
-    pub fn load(root_profiles_dir: &Path) -> Result<(Self, Vec<(PathBuf, Error)>), Error> {
-        std::fs::create_dir_all(root_profiles_dir)?;
+    pub fn load(profiles_dir: &Path) -> Result<(Self, Vec<(PathBuf, Error)>), Error> {
+        std::fs::create_dir_all(profiles_dir)?;
 
         let mut locked: HashMap<PathBuf, LockedProfile> = HashMap::new();
 
         let mut identity_warnings: Vec<(PathBuf, Error)> = vec![];
 
-        for entry in std::fs::read_dir(root_profiles_dir)? {
+        for entry in std::fs::read_dir(profiles_dir)? {
             let profile_dir = entry?.path();
 
             if !profile_dir.is_dir() {
@@ -41,11 +44,31 @@ impl Store {
 
         Ok((
             Store {
+                profiles_dir: profiles_dir.to_path_buf(),
                 locked,
                 unlocked: HashMap::new(),
             },
             identity_warnings,
         ))
+    }
+
+    pub fn create_profile(&mut self, name: String, password: &str) -> Result<PathBuf, Error> {
+        let identity = Identity::new(name.clone())?;
+        let profile_dir = self.profiles_dir.join(identity.generate_folder_name()?);
+        std::fs::create_dir_all(&profile_dir)?;
+        identity.save(&profile_dir)?;
+
+        let salt = crypto::generate_salt()?;
+        let key = crypto::derive_key(&password, &salt)?;
+
+        let data = CvData::new(name);
+
+        let mut profile = UnlockedProfile::new(identity, data, salt, key)?;
+        profile.save(&profile_dir)?;
+
+        self.unlocked.insert(profile_dir.clone(), profile);
+
+        Ok(profile_dir)
     }
 
     pub fn all_locked(&self) -> Vec<(&Path, &LockedProfile)> {
