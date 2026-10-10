@@ -25,6 +25,42 @@ pub struct CvData {
     pub hobbies: Vec<String>,
 }
 
+impl CvData {
+    pub const MODEL_VERSION: u32 = 1;
+
+    pub fn new(name: String) -> Self {
+        Self {
+            version: Self::MODEL_VERSION,
+            name,
+            title: None,
+            description: None,
+            age_display: None,
+            location: None,
+            email: None,
+            links: Vec::new(),
+            projects: Vec::new(),
+            experience: Vec::new(),
+            education: Vec::new(),
+            hard_skills: Vec::new(),
+            soft_skills: Vec::new(),
+            languages: Vec::new(),
+            hobbies: Vec::new(),
+        }
+    }
+
+    pub(crate) fn content_hash(&self) -> Result<blake3::Hash, Error> {
+        Ok(blake3::hash(&serde_json::to_vec(self)?))
+    }
+
+    pub(crate) fn to_bytes(&self) -> Result<Vec<u8>, Error> {
+        Ok(serde_json::to_vec(self)?)
+    }
+
+    pub(crate) fn from_bytes(bytes: &[u8]) -> Result<Self, Error> {
+        Ok(serde_json::from_slice(bytes)?)
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Link {
     pub label: String,
@@ -75,18 +111,4 @@ pub struct SkillGroup {
 pub struct LanguageSkill {
     pub name: String,
     pub level: String,
-}
-
-impl CvData {
-    pub(crate) fn content_hash(&self) -> Result<blake3::Hash, Error> {
-        Ok(blake3::hash(&serde_json::to_vec(self)?))
-    }
-
-    pub(crate) fn to_bytes(&self) -> Result<Vec<u8>, Error> {
-        Ok(serde_json::to_vec(self)?)
-    }
-
-    pub(crate) fn from_bytes(bytes: &[u8]) -> Result<Self, Error> {
-        Ok(serde_json::from_slice(bytes)?)
-    }
 }
