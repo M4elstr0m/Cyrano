@@ -1,14 +1,12 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+// #![warn(missing_docs)]
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod crypto;
+pub mod cv_data;
+mod path;
+pub mod preferences;
+pub mod profile;
+mod time;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub const APP_QUALIFIER: &str = "com";
+pub const APP_ORGANIZATION: &str = "M4elstr0m";
+pub const APP_NAME: &str = "Cyrano";
