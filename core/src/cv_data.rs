@@ -8,8 +8,8 @@ pub struct CvData {
     pub version: u32,
 
     pub name: String,
-    pub title: String,
-    pub description: String,
+    pub title: Option<String>,
+    pub description: Option<String>,
 
     pub age_display: Option<String>,
     pub location: Option<String>,
