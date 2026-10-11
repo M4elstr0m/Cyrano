@@ -24,6 +24,8 @@ pub struct Preferences {
     profiles_dir: Option<PathBuf>,
 
     templates_dir: Option<PathBuf>,
+
+    output_dir: Option<PathBuf>,
 }
 
 impl Preferences {
@@ -60,6 +62,13 @@ impl Preferences {
         match &self.templates_dir {
             Some(p) => Ok(p.clone()),
             None => Ok(app_directory()?.data_dir().join("templates")),
+        }
+    }
+
+    pub fn output_dir(&self) -> Result<PathBuf, Error> {
+        match &self.output_dir {
+            Some(p) => Ok(p.clone()),
+            None => Ok(app_directory()?.data_dir().join("output")),
         }
     }
 }

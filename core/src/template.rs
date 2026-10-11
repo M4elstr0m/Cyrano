@@ -10,7 +10,7 @@ pub use store::Store;
 mod rendered;
 pub use rendered::RenderedTemplate;
 
-pub(self) const AUTOESCAPE_SUFFIXES: [&str; 2] = ["html.tera", "html"];
+const AUTOESCAPE_SUFFIXES: [&str; 2] = ["html.tera", "html"];
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Template {
