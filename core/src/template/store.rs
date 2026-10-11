@@ -31,6 +31,9 @@ impl Store {
                 Ok(t) => {
                     templates.insert(template_dir, t);
                 }
+                Err(Error::NoMarker) => {
+                    continue;
+                }
                 Err(e) => marker_warnings.push((template_dir, e)),
             }
         }
