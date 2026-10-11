@@ -5,6 +5,7 @@ pub mod cv_data;
 mod path;
 pub mod preferences;
 pub mod profile;
+pub mod template;
 mod time;
 
 pub const APP_QUALIFIER: &str = "com";
