@@ -7,6 +7,11 @@ pub use error::Error;
 mod store;
 pub use store::Store;
 
+mod rendered;
+pub use rendered::RenderedTemplate;
+
+pub(self) const AUTOESCAPE_SUFFIXES: [&str; 2] = ["html.tera", "html"];
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Template {
     pub name: String,
@@ -35,6 +40,9 @@ impl Template {
         if !template.entry_path.is_file() {
             return Err(Error::NoEntry);
         }
+        if !has_autoescaped_suffix(&template.entry_path) {
+            return Err(Error::InvalidEntry);
+        }
 
         Ok(template)
     }
@@ -42,4 +50,11 @@ impl Template {
 
 fn template_marker_path(template_dir: &Path) -> PathBuf {
     template_dir.join("TEMPLATE.cyrano")
+}
+
+fn has_autoescaped_suffix(path: &Path) -> bool {
+    let name = path.to_string_lossy();
+    AUTOESCAPE_SUFFIXES
+        .iter()
+        .any(|suffix| name.ends_with(suffix))
 }
