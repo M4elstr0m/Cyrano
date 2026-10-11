@@ -18,7 +18,7 @@ impl Store {
 
         let mut locked: HashMap<PathBuf, LockedProfile> = HashMap::new();
 
-        let mut identity_warnings: Vec<(PathBuf, Error)> = vec![];
+        let mut identity_warnings: Vec<(PathBuf, Error)> = Vec::new();
 
         for entry in std::fs::read_dir(profiles_dir)? {
             let profile_dir = entry?.path();
