@@ -32,6 +32,6 @@ impl Template {
     }
 }
 
-fn template_marker_path(profile_dir: &Path) -> PathBuf {
-    profile_dir.join("TEMPLATE.cyrano")
+fn template_marker_path(template_dir: &Path) -> PathBuf {
+    template_dir.join("TEMPLATE.cyrano")
 }
