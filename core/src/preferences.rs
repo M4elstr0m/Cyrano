@@ -22,6 +22,8 @@ fn app_directory() -> Result<ProjectDirs, Error> {
 #[serde(default)]
 pub struct Preferences {
     profiles_dir: Option<PathBuf>,
+
+    templates_dir: Option<PathBuf>,
 }
 
 impl Preferences {
@@ -51,6 +53,13 @@ impl Preferences {
         match &self.profiles_dir {
             Some(p) => Ok(p.clone()),
             None => Ok(app_directory()?.data_dir().join("profiles")),
+        }
+    }
+
+    pub fn templates_dir(&self) -> Result<PathBuf, Error> {
+        match &self.templates_dir {
+            Some(p) => Ok(p.clone()),
+            None => Ok(app_directory()?.data_dir().join("templates")),
         }
     }
 }
