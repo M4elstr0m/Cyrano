@@ -15,4 +15,7 @@ pub enum Error {
     // mostly because no valid name
     #[error("template's marker file is corrupted or malformed")]
     InvalidMarker,
+
+    #[error("template's marker file has no valid template entry point")]
+    NoEntry,
 }
