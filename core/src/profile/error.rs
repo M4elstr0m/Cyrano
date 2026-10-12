@@ -30,4 +30,7 @@ pub enum Error {
 
     #[error("no profile was found at this location")]
     NotFound,
+
+    #[error("an asset format is not recognized")]
+    UnrecognizedAssetFormat,
 }

@@ -18,7 +18,7 @@ impl Store {
 
         let mut locked: HashMap<PathBuf, LockedProfile> = HashMap::new();
 
-        let mut identity_warnings: Vec<(PathBuf, Error)> = vec![];
+        let mut identity_warnings: Vec<(PathBuf, Error)> = Vec::new();
 
         for entry in std::fs::read_dir(profiles_dir)? {
             let profile_dir = entry?.path();
@@ -117,6 +117,19 @@ impl Store {
 
         self.locked.remove(profile_dir);
         self.unlocked.insert(profile_dir.to_path_buf(), unlocked);
+
+        Ok(())
+    }
+
+    pub fn delete_profile(&mut self, profile_dir: &Path) -> Result<(), Error> {
+        if !self.locked.contains_key(profile_dir) && !self.unlocked.contains_key(profile_dir) {
+            return Err(Error::NotFound);
+        }
+
+        std::fs::remove_dir_all(profile_dir)?;
+
+        self.locked.remove(profile_dir);
+        self.unlocked.remove(profile_dir);
 
         Ok(())
     }
