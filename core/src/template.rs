@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
+use tera::Tera;
 
 mod error;
 pub use error::Error;
@@ -9,6 +10,8 @@ pub use store::Store;
 
 mod rendered;
 pub use rendered::RenderedTemplate;
+
+use crate::cv_data::CvData;
 
 const AUTOESCAPE_SUFFIXES: [&str; 2] = ["html.tera", "html"];
 
@@ -45,6 +48,24 @@ impl Template {
         }
 
         Ok(template)
+    }
+
+    pub fn render(&self, template_dir: &Path, cv_data: &CvData) -> Result<RenderedTemplate, Error> {
+        let glob = format!("{}/**/*", template_dir.display());
+        let mut tera = Tera::new();
+        tera.load_from_glob(&glob)?;
+        tera.autoescape_on(AUTOESCAPE_SUFFIXES);
+
+        let entry_name = self
+            .entry_path
+            .strip_prefix(template_dir)
+            .map_err(|_| Error::InvalidEntry)?
+            .to_string_lossy()
+            .into_owned();
+
+        let context = tera::Context::from_serialize(cv_data)?;
+
+        Ok(RenderedTemplate::new(tera.render(&entry_name, &context)?))
     }
 }
 
