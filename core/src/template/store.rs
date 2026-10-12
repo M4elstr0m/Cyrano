@@ -1,5 +1,3 @@
-use tera::Tera;
-
 use crate::cv_data::CvData;
 
 use super::{Error, RenderedTemplate, Template};
