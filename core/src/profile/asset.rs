@@ -1,6 +1,8 @@
 use super::Error;
 use base64::{Engine, engine::general_purpose::STANDARD};
+use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Asset {
     name: String,
     bytes: Vec<u8>,

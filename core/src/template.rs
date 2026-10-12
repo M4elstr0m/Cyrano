@@ -25,10 +25,8 @@ pub struct Template {
     pub entry_path: PathBuf,
 
     #[serde(default)]
-    pub uses_profile_picture: bool,
+    pub required_assets: Vec<Asset>,
 }
-
-const ASSET_PROFILE_PICTURE: &'static str = "PROFILE_PICTURE";
 
 impl Template {
     pub fn load(template_dir: &Path) -> Result<Self, Error> {
@@ -75,14 +73,15 @@ impl Template {
 
         let mut context = tera::Context::from_serialize(cv_data)?;
 
-        if self.uses_profile_picture
-            && assets
+        for required_asset in &self.required_assets {
+            if assets
                 .iter()
-                .filter(|a| a.name() == ASSET_PROFILE_PICTURE)
+                .filter(|a| a.name() == required_asset.name())
                 .count()
-                != 1
-        {
-            return Err(Error::MissingAsset(ASSET_PROFILE_PICTURE.to_owned()));
+                == 0
+            {
+                return Err(Error::MissingAsset(required_asset.name().to_owned()));
+            }
         }
 
         for asset in assets {
