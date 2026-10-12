@@ -31,4 +31,10 @@ pub enum Error {
 
     #[error("no template was found at this location")]
     NotFound,
+
+    #[error("asset is missing")]
+    MissingAsset(String),
+
+    #[error("asset is not supported")]
+    BadAsset(String),
 }

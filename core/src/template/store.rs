@@ -1,4 +1,4 @@
-use crate::cv_data::CvData;
+use crate::{cv_data::CvData, profile::Asset};
 
 use super::{Error, RenderedTemplate, Template};
 use std::{
@@ -50,9 +50,14 @@ impl Store {
             .collect()
     }
 
-    pub fn render(&self, template_dir: &Path, cv_data: &CvData) -> Result<RenderedTemplate, Error> {
+    pub fn render(
+        &self,
+        template_dir: &Path,
+        cv_data: &CvData,
+        assets: &[Asset],
+    ) -> Result<RenderedTemplate, Error> {
         let template = self.templates.get(template_dir).ok_or(Error::NotFound)?;
 
-        template.render(template_dir, cv_data)
+        template.render(template_dir, cv_data, assets)
     }
 }

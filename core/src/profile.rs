@@ -15,6 +15,9 @@ pub use store::Store;
 mod identity;
 pub use identity::Identity;
 
+mod asset;
+pub use asset::Asset;
+
 fn data_path(profile_dir: &Path) -> PathBuf {
     profile_dir.join("data.bin")
 }

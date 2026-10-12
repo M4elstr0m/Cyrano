@@ -11,7 +11,7 @@ pub use store::Store;
 mod rendered;
 pub use rendered::RenderedTemplate;
 
-use crate::cv_data::CvData;
+use crate::{cv_data::CvData, profile::Asset};
 
 const AUTOESCAPE_SUFFIXES: [&str; 2] = ["html.tera", "html"];
 
@@ -23,7 +23,12 @@ pub struct Template {
     pub description: Option<String>,
 
     pub entry_path: PathBuf,
+
+    #[serde(default)]
+    pub uses_profile_picture: bool,
 }
+
+const ASSET_PROFILE_PICTURE: &'static str = "PROFILE_PICTURE";
 
 impl Template {
     pub fn load(template_dir: &Path) -> Result<Self, Error> {
@@ -50,7 +55,12 @@ impl Template {
         Ok(template)
     }
 
-    pub fn render(&self, template_dir: &Path, cv_data: &CvData) -> Result<RenderedTemplate, Error> {
+    pub fn render(
+        &self,
+        template_dir: &Path,
+        cv_data: &CvData,
+        assets: &[Asset],
+    ) -> Result<RenderedTemplate, Error> {
         let glob = format!("{}/**/*", template_dir.display());
         let mut tera = Tera::new();
         tera.load_from_glob(&glob)?;
@@ -63,7 +73,25 @@ impl Template {
             .to_string_lossy()
             .into_owned();
 
-        let context = tera::Context::from_serialize(cv_data)?;
+        let mut context = tera::Context::from_serialize(cv_data)?;
+
+        if self.uses_profile_picture
+            && assets
+                .iter()
+                .filter(|a| a.name() == ASSET_PROFILE_PICTURE)
+                .count()
+                != 1
+        {
+            return Err(Error::MissingAsset(ASSET_PROFILE_PICTURE.to_owned()));
+        }
+
+        for asset in assets {
+            let uri = asset
+                .data_uri()
+                .map_err(|_| Error::BadAsset(asset.name().to_owned()))?;
+
+            context.insert(asset.name().to_string(), &uri);
+        }
 
         Ok(RenderedTemplate::new(tera.render(&entry_name, &context)?))
     }

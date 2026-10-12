@@ -1,6 +1,6 @@
 use zeroize::Zeroizing;
 
-use super::{Error, Identity, LockedProfile};
+use super::{Asset, Error, Identity, LockedProfile};
 use crate::crypto;
 use crate::cv_data::CvData;
 use std::path::Path;
@@ -77,26 +77,24 @@ impl UnlockedProfile {
         Ok(())
     }
 
-    pub fn save_asset(
-        &self,
-        profile_dir: &Path,
-        filename: &str,
-        bytes: &[u8],
-    ) -> Result<(), Error> {
+    pub fn save_asset(&self, profile_dir: &Path, asset: &Asset) -> Result<(), Error> {
         let assets_dir = super::assets_dir(profile_dir);
 
         std::fs::create_dir_all(&assets_dir)?;
 
-        let blob = crypto::encrypt_with_key(&self.key, bytes)?;
+        let blob = crypto::encrypt_with_key(&self.key, asset.bytes())?;
 
-        std::fs::write(assets_dir.join(filename), blob)?;
+        std::fs::write(assets_dir.join(asset.name()), blob)?;
 
         Ok(())
     }
 
-    pub fn load_asset(&self, profile_dir: &Path, filename: &str) -> Result<Vec<u8>, Error> {
+    pub fn load_asset(&self, profile_dir: &Path, filename: &str) -> Result<Asset, Error> {
         let blob = std::fs::read(super::assets_dir(profile_dir).join(filename))?;
 
-        Ok(crypto::decrypt_with_key(&self.key, &blob)?)
+        Ok(Asset::new(
+            filename.to_owned(),
+            crypto::decrypt_with_key(&self.key, &blob)?,
+        ))
     }
 }
