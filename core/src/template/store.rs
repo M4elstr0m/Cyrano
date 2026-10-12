@@ -60,4 +60,16 @@ impl Store {
 
         template.render(template_dir, cv_data, assets)
     }
+
+    pub fn delete_template(&mut self, template_dir: &Path) -> Result<(), Error> {
+        if !self.templates.contains_key(template_dir) {
+            return Err(Error::NotFound);
+        }
+
+        std::fs::remove_dir_all(template_dir)?;
+
+        self.templates.remove(template_dir);
+
+        Ok(())
+    }
 }

@@ -120,4 +120,17 @@ impl Store {
 
         Ok(())
     }
+
+    pub fn delete_profile(&mut self, profile_dir: &Path) -> Result<(), Error> {
+        if !self.locked.contains_key(profile_dir) && !self.unlocked.contains_key(profile_dir) {
+            return Err(Error::NotFound);
+        }
+
+        std::fs::remove_dir_all(profile_dir)?;
+
+        self.locked.remove(profile_dir);
+        self.unlocked.remove(profile_dir);
+
+        Ok(())
+    }
 }
