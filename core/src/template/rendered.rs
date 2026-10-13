@@ -5,7 +5,7 @@ use mestra_core as mestra;
 
 pub struct RenderedTemplate(String);
 
-const TEMP_FILE_PREFIX: &'static str = "cyrano_template";
+const TEMP_FILE_PREFIX: &str = "cyrano_template";
 
 impl RenderedTemplate {
     pub(super) fn new(content: String) -> Self {
