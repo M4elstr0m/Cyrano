@@ -9,7 +9,7 @@ pub fn Logo(#[props(default)] class: String, #[props(default)] large: bool) -> E
 
     rsx! {
         img {
-            class: "shrink-0 rounded-full border border-line object-cover shadow-card {class}",
+            class: "shrink-0 {class}",
             src,
             alt: "Cyrano",
         }
