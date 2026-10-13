@@ -12,9 +12,9 @@ pub fn TextArea(
     rsx! {
         div { class: "flex flex-col gap-1.5",
             span { class: "text-xs font-medium text-soft", "{label}" }
-            div { class: "ring-within relative rounded-xl border border-line bg-inset",
+            div { class: "ring-within relative flex rounded-xl border border-line bg-inset",
                 if show_placeholder {
-                    span { class: "pointer-events-none absolute left-0 top-0 px-3.5 py-2.5 text-sm text-soft opacity-70",
+                    span { class: "pointer-events-none absolute -z-10 left-0 top-0 px-3.5 py-2.5 text-sm text-soft opacity-70",
                         "{placeholder}"
                     }
                 }

@@ -21,7 +21,7 @@ pub fn PasswordInput(
             span { class: "text-xs font-medium text-soft", "{label}" }
             div { class: "ring-within relative flex items-center rounded-xl border border-line bg-inset",
                 if !revealed() {
-                    span { class: "absolute inset-y-0 left-0 flex items-center pl-3.5 text-sm tracking-widest text-ink",
+                    span { class: "absolute -z-10 inset-y-0 left-0 flex items-center pl-3.5 text-sm tracking-widest text-ink",
                         "{dots}"
                     }
                 }

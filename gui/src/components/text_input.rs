@@ -16,7 +16,7 @@ pub fn TextInput(
             span { class: "text-xs font-medium text-soft", "{label}" }
             div { class: "ring-within relative flex items-center rounded-xl border border-line bg-inset",
                 if show_placeholder {
-                    span { class: "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-sm text-soft opacity-70",
+                    span { class: "pointer-events-none absolute -z-10 inset-y-0 left-0 flex items-center pl-3.5 text-sm text-soft opacity-70",
                         "{placeholder}"
                     }
                 }
