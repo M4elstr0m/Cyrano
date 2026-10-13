@@ -88,25 +88,34 @@ fn TemplateCard(
 
     rsx! {
         div {
-            class: "flex w-80 cursor-pointer flex-col gap-5 rounded-3xl border border-line bg-surface p-6 shadow-card hover:border-accent",
+            class: "animate-fade-up lift flex w-80 cursor-pointer flex-col gap-5 rounded-[28px] border border-line bg-surface p-4 shadow-card",
             onclick: move |_| state.open_template(folder.clone()),
-            span { class: "flex size-12 items-center justify-center rounded-2xl bg-accent-soft text-xl font-semibold text-accent",
-                "{initial}"
+            div { class: "bg-sheen flex h-44 items-center justify-center rounded-2xl border border-line",
+                div { class: "flex h-32 w-24 flex-col gap-2 rounded-lg bg-white p-3 shadow-page",
+                    div { class: "flex items-center gap-2",
+                        span { class: "bg-brand size-5 rounded-full" }
+                        span { class: "h-1.5 flex-1 rounded-full bg-[#d9deea]" }
+                    }
+                    span { class: "h-1.5 w-full rounded-full bg-[#e6e9f2]" }
+                    span { class: "h-1.5 w-4/5 rounded-full bg-[#e6e9f2]" }
+                    span { class: "h-1.5 w-3/5 rounded-full bg-[#e6e9f2]" }
+                    span { class: "mt-auto text-[10px] font-bold text-[#2f6bff]", "{initial}" }
+                }
             }
-            div { class: "flex flex-col gap-1.5",
-                h2 { class: "text-lg font-semibold", "{name}" }
+            div { class: "flex flex-col gap-1.5 px-2",
+                h2 { class: "text-lg font-semibold tracking-tight", "{name}" }
                 if let Some(description) = description {
                     p { class: "text-sm text-soft", "{description}" }
                 }
             }
             if !assets.is_empty() {
-                div { class: "flex flex-wrap items-center gap-2",
+                div { class: "flex flex-wrap items-center gap-2 px-2",
                     for asset in assets {
                         Badge { key: "{asset}", tone: Tone::Accent, "{humanize(&asset)}" }
                     }
                 }
             }
-            div { class: "mt-auto flex items-center justify-between gap-3",
+            div { class: "mt-auto flex items-center justify-between gap-3 px-2 pb-2",
                 span { class: "rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary",
                     "Use template"
                 }
