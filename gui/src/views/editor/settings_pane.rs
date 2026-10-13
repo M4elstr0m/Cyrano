@@ -1,4 +1,4 @@
-use super::{action_bar::ActionBar, session::use_session};
+use super::{action_bar::ActionBar, profile_picker::ProfilePicker, session::use_session};
 use crate::{
     components::{Button, Size, Variant},
     route::Route,
@@ -28,7 +28,9 @@ pub fn SettingsPane() -> Element {
                     "Change"
                 }
             }
-            div { class: "flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto p-6" }
+            div { class: "flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto p-6",
+                ProfilePicker {}
+            }
             ActionBar {}
         }
     }
