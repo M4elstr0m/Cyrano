@@ -2,6 +2,7 @@ use super::{
     super::session::use_session,
     date_range::date_fields,
     row::{AddButton, RowCard},
+    string_list::StringListEditor,
     support::{move_to, new_range, with_item},
 };
 use crate::components::{Section, TextInput};
@@ -28,6 +29,7 @@ pub fn ExperienceSection() -> Element {
                             title: String::new(),
                             company: String::new(),
                             date: new_range(),
+                            used_skills: Vec::new(),
                         });
                 },
             }
@@ -64,6 +66,16 @@ fn ExperienceRow(index: usize) -> Element {
                 value: item.company,
                 oninput: move |value| {
                     with_item(&mut draft.write().experience, index, |item| item.company = value)
+                },
+            }
+            StringListEditor {
+                list: format!("experience-skills-{index}"),
+                label: "Skill used",
+                placeholder: "e.g. Rust",
+                add_label: "Add skill",
+                items: item.used_skills,
+                onchange: move |skills| {
+                    with_item(&mut draft.write().experience, index, |item| item.used_skills = skills)
                 },
             }
             {

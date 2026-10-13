@@ -94,6 +94,8 @@ pub struct Experience {
     pub title: String,
     pub company: String,
     pub date: DateRange,
+    #[serde(default)]
+    pub used_skills: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
