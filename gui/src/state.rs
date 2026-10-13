@@ -36,6 +36,7 @@ pub struct AppState {
     pub opened: Signal<Vec<String>>,
     pub flushers: Signal<Vec<Callback<()>>>,
     pub maximized: Signal<bool>,
+    pub current_profile: Signal<Option<String>>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -80,6 +81,7 @@ impl AppState {
             opened: Signal::new(Vec::new()),
             flushers: Signal::new(Vec::new()),
             maximized: Signal::new(false),
+            current_profile: Signal::new(None),
         })
     }
 
@@ -101,6 +103,10 @@ impl AppState {
         }
 
         std::process::exit(0);
+    }
+
+    pub fn set_current_profile(mut self, name: Option<String>) {
+        self.current_profile.set(name);
     }
 
     pub fn go_home(mut self) {

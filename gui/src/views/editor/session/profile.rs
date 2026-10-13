@@ -16,6 +16,14 @@ impl Session {
 
         let Some(data) = data else { return };
 
+        let name = self
+            .state
+            .profiles
+            .read()
+            .unlocked(&dir)
+            .map(|profile| profile.identity().name.clone());
+
+        self.state.set_current_profile(name);
         self.draft.set(data);
         self.active.set(Some(dir));
         self.preview.set(Preview::Idle);
@@ -49,6 +57,7 @@ impl Session {
     }
 
     fn clear(mut self) {
+        self.state.set_current_profile(None);
         self.active.set(None);
         self.draft.set(CvData::new(String::new()));
         self.assets.set(Vec::new());
