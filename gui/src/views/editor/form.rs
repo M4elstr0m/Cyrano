@@ -1,15 +1,19 @@
 use dioxus::prelude::*;
 use education::EducationSection;
 use experience::ExperienceSection;
+use hard_skills::HardSkillsSection;
 use identity::IdentitySection;
 use links::LinksSection;
+use lists::{HobbiesSection, SoftSkillsSection};
 use projects::ProjectsSection;
 
 mod date_range;
 mod education;
 mod experience;
+mod hard_skills;
 mod identity;
 mod links;
+mod lists;
 mod projects;
 mod row;
 mod string_list;
@@ -23,5 +27,8 @@ pub fn CvForm() -> Element {
         ExperienceSection {}
         EducationSection {}
         ProjectsSection {}
+        HardSkillsSection {}
+        HobbiesSection {}
+        SoftSkillsSection {}
     }
 }
