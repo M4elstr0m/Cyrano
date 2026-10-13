@@ -81,6 +81,7 @@
   ::before,
   ::after {
     border-style: none;
+    border-color: transparent;
     outline-style: none;
     --tw-border-style: solid;
     --tw-shadow: 0 0 #0000;
