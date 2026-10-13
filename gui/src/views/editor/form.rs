@@ -3,6 +3,7 @@ use education::EducationSection;
 use experience::ExperienceSection;
 use hard_skills::HardSkillsSection;
 use identity::IdentitySection;
+use languages::LanguagesSection;
 use links::LinksSection;
 use lists::{HobbiesSection, SoftSkillsSection};
 use projects::ProjectsSection;
@@ -12,6 +13,7 @@ mod education;
 mod experience;
 mod hard_skills;
 mod identity;
+mod languages;
 mod links;
 mod lists;
 mod projects;
@@ -30,5 +32,6 @@ pub fn CvForm() -> Element {
         HardSkillsSection {}
         HobbiesSection {}
         SoftSkillsSection {}
+        LanguagesSection {}
     }
 }
