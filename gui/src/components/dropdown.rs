@@ -6,19 +6,15 @@ struct Menu {
 }
 
 #[component]
-pub fn Dropdown(trigger: Element, children: Element) -> Element {
+pub fn Dropdown(#[props(default)] class: String, trigger: Element, children: Element) -> Element {
     let mut open = use_signal(|| false);
     use_context_provider(|| Menu { open });
 
     rsx! {
-        div { class: "relative",
-            div { onclick: move |_| open.set(!open()), {trigger} }
+        div { class: "flex flex-col gap-2 {class}",
+            div { class: "flex flex-col", onclick: move |_| open.set(!open()), {trigger} }
             if open() {
-                div {
-                    class: "fixed inset-0 z-10",
-                    onclick: move |_| open.set(false),
-                }
-                div { class: "absolute left-0 right-0 top-full z-20 mt-2 flex flex-col gap-1 rounded-2xl border border-line bg-surface p-2 shadow-overlay",
+                div { class: "flex flex-col gap-1 rounded-2xl border border-line bg-surface p-2",
                     {children}
                 }
             }

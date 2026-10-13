@@ -12,9 +12,9 @@ pub fn Section(
     let indicator = if expanded() { "−" } else { "+" };
 
     rsx! {
-        div { class: "overflow-hidden rounded-2xl border border-line bg-surface",
+        div { class: "flex flex-col rounded-2xl border border-line bg-surface",
             button {
-                class: "flex w-full items-center justify-between px-4 py-3 text-left hover:bg-inset",
+                class: "flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left hover:bg-inset",
                 r#type: "button",
                 onclick: move |_| expanded.set(!expanded()),
                 span { class: "flex items-center gap-2 text-sm font-semibold",
