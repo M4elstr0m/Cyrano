@@ -6,6 +6,7 @@ mod modal;
 mod section;
 mod text_area;
 mod text_input;
+mod toasts;
 mod tone;
 
 pub use badge::Badge;
@@ -16,4 +17,5 @@ pub use modal::Modal;
 pub use section::Section;
 pub use text_area::TextArea;
 pub use text_input::TextInput;
+pub use toasts::Toasts;
 pub use tone::Tone;

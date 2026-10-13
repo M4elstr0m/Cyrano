@@ -4,8 +4,6 @@ mod components;
 mod preferences;
 mod state;
 
-
-
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 const HEADER_SVG: Asset = asset!("/assets/header.svg");
@@ -21,7 +19,7 @@ fn App() -> Element {
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: MAIN_CSS } document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         Hero {}
-        
+
     }
 }
 
@@ -42,7 +40,3 @@ pub fn Hero() -> Element {
         }
     }
 }
-
-
-
-
