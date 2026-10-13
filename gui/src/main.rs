@@ -1,7 +1,5 @@
-use dioxus::{
-    native::{Config, LogicalSize, WindowAttributes},
-    prelude::*,
-};
+use dioxus::prelude::*;
+use dioxus_native::{Config, LogicalSize, WindowAttributes};
 use state::AppState;
 use views::{Fatal, Shell};
 
@@ -23,9 +21,10 @@ const RALEWAY: Asset = asset!(
 fn main() {
     let window = WindowAttributes::default()
         .with_title("Cyrano")
+        .with_decorations(false)
         .with_inner_size(LogicalSize::new(1360.0, 860.0));
 
-    dioxus::native::launch_cfg(
+    dioxus_native::launch_cfg(
         App,
         Vec::new(),
         vec![Box::new(Config::new().with_window_attributes(window))],

@@ -859,6 +859,7 @@ dependencies = [
  "stylo_taffy",
  "stylo_traits",
  "taffy",
+ "tracing",
  "url",
  "usvg",
 ]
@@ -924,6 +925,7 @@ dependencies = [
  "futures-util",
  "keyboard-types",
  "rfd",
+ "tracing",
  "winit",
 ]
 
@@ -1902,6 +1904,7 @@ dependencies = [
  "base64 0.23.1",
  "cyrano-core",
  "dioxus",
+ "dioxus-native 0.7.10",
  "directories",
  "hayro",
  "opener",
@@ -1911,6 +1914,7 @@ dependencies = [
  "thiserror 2.0.21",
  "tokio",
  "toml 1.1.6+spec-1.1.0",
+ "winit",
 ]
 
 [[package]]
@@ -2161,7 +2165,7 @@ dependencies = [
  "dioxus-hooks",
  "dioxus-html",
  "dioxus-logger",
- "dioxus-native",
+ "dioxus-native 0.7.10 (registry+https://github.com/rust-lang/crates.io-index)",
  "dioxus-signals",
  "dioxus-stores",
  "dioxus-web",
@@ -2561,6 +2565,41 @@ dependencies = [
 [[package]]
 name = "dioxus-native"
 version = "0.7.10"
+dependencies = [
+ "anyrender",
+ "anyrender_vello",
+ "anyrender_vello_cpu",
+ "blitz-dom",
+ "blitz-html",
+ "blitz-net",
+ "blitz-paint",
+ "blitz-shell",
+ "blitz-traits",
+ "dioxus-asset-resolver",
+ "dioxus-cli-config",
+ "dioxus-core",
+ "dioxus-core-macro",
+ "dioxus-devtools",
+ "dioxus-document",
+ "dioxus-history",
+ "dioxus-hooks",
+ "dioxus-html",
+ "dioxus-native-dom",
+ "dioxus-signals",
+ "dioxus-stores",
+ "futures-util",
+ "keyboard-types",
+ "manganis",
+ "rustc-hash 2.1.3",
+ "tokio",
+ "tracing",
+ "webbrowser",
+ "winit",
+]
+
+[[package]]
+name = "dioxus-native"
+version = "0.7.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6d022085082d379df7f453cc465a7cfb75926c5e23d5781dbcbdf5df269840e5"
 dependencies = [
@@ -2602,6 +2641,7 @@ dependencies = [
  "futures-util",
  "keyboard-types",
  "rustc-hash 2.1.3",
+ "tracing",
 ]
 
 [[package]]
