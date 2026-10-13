@@ -1,4 +1,3 @@
-use super::text_input::FIELD_CLASS;
 use dioxus::prelude::*;
 
 #[component]
@@ -8,15 +7,23 @@ pub fn TextArea(
     #[props(default)] placeholder: String,
     oninput: EventHandler<String>,
 ) -> Element {
+    let show_placeholder = value.is_empty() && !placeholder.is_empty();
+
     rsx! {
-        label { class: "flex flex-col gap-1.5",
+        div { class: "flex flex-col gap-1.5",
             span { class: "text-xs font-medium text-soft", "{label}" }
-            textarea {
-                class: "{FIELD_CLASS} min-h-24",
-                rows: 4,
-                value,
-                placeholder,
-                oninput: move |event| oninput.call(event.value()),
+            div { class: "ring-within relative rounded-xl border border-line bg-inset",
+                if show_placeholder {
+                    span { class: "pointer-events-none absolute left-0 top-0 px-3.5 py-2.5 text-sm text-soft opacity-70",
+                        "{placeholder}"
+                    }
+                }
+                textarea {
+                    class: "min-h-24 w-full bg-transparent px-3.5 py-2.5 text-sm text-ink outline-none",
+                    rows: 4,
+                    value,
+                    oninput: move |event| oninput.call(event.value()),
+                }
             }
         }
     }

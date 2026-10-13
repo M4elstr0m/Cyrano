@@ -1,7 +1,5 @@
 use dioxus::prelude::*;
 
-pub const FIELD_CLASS: &str = "w-full rounded-xl border border-line bg-inset px-3.5 py-2.5 text-sm text-ink outline-none ring-focus";
-
 #[component]
 pub fn TextInput(
     #[props(into)] label: String,
@@ -11,21 +9,29 @@ pub fn TextInput(
     oninput: EventHandler<String>,
     #[props(default)] onenter: EventHandler<()>,
 ) -> Element {
+    let show_placeholder = value.is_empty() && !placeholder.is_empty();
+
     rsx! {
-        label { class: "flex flex-col gap-1.5",
+        div { class: "flex flex-col gap-1.5",
             span { class: "text-xs font-medium text-soft", "{label}" }
-            input {
-                class: FIELD_CLASS,
-                r#type: "text",
-                value,
-                placeholder,
-                autofocus,
-                oninput: move |event| oninput.call(event.value()),
-                onkeydown: move |event| {
-                    if event.key() == Key::Enter {
-                        onenter.call(());
+            div { class: "ring-within relative flex items-center rounded-xl border border-line bg-inset",
+                if show_placeholder {
+                    span { class: "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-sm text-soft opacity-70",
+                        "{placeholder}"
                     }
-                },
+                }
+                input {
+                    class: "w-full bg-transparent px-3.5 py-2.5 text-sm text-ink outline-none",
+                    r#type: "text",
+                    value,
+                    autofocus,
+                    oninput: move |event| oninput.call(event.value()),
+                    onkeydown: move |event| {
+                        if event.key() == Key::Enter {
+                            onenter.call(());
+                        }
+                    },
+                }
             }
         }
     }
