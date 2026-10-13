@@ -37,10 +37,7 @@ pub fn DateRangeFields(
                 year: start.0,
                 month: start.1,
             },
-            end: end.0.map(|year| YearMonth {
-                year,
-                month: end.1,
-            }),
+            end: end.0.map(|year| YearMonth { year, month: end.1 }),
         });
     };
 
