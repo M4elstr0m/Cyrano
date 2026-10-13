@@ -285,10 +285,6 @@
     width: calc(var(--spacing) * 1);
     height: calc(var(--spacing) * 1);
   }
-  .size-1\.5 {
-    width: calc(var(--spacing) * 1.5);
-    height: calc(var(--spacing) * 1.5);
-  }
   .size-2 {
     width: calc(var(--spacing) * 2);
     height: calc(var(--spacing) * 2);
@@ -338,12 +334,6 @@
   .h-1\.5 {
     height: calc(var(--spacing) * 1.5);
   }
-  .h-3\.5 {
-    height: calc(var(--spacing) * 3.5);
-  }
-  .h-4 {
-    height: calc(var(--spacing) * 4);
-  }
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
@@ -376,12 +366,6 @@
   }
   .w-4\/5 {
     width: calc(4/5 * 100%);
-  }
-  .w-6 {
-    width: calc(var(--spacing) * 6);
-  }
-  .w-7 {
-    width: calc(var(--spacing) * 7);
   }
   .w-24 {
     width: calc(var(--spacing) * 24);
@@ -428,28 +412,6 @@
   .shrink-0 {
     flex-shrink: 0;
   }
-  .lifted {
-    transform: scale(1.02);
-    border-color: var(--accent);
-    box-shadow: 0 16px 40px rgba(var(--shade), 0.22);
-  }
-  .zoom {
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
-    &:hover {
-      transform: scale(1.025);
-      border-color: var(--accent);
-    }
-    &:active {
-      transform: scale(0.99);
-    }
-  }
-  .nudge {
-    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease;
-    &:hover {
-      transform: translateX(4px);
-      color: var(--accent);
-    }
-  }
   .control {
     transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease, color 0.25s ease;
     &:hover {
@@ -457,15 +419,6 @@
     }
     &:active {
       transform: scale(0.94);
-    }
-  }
-  .press {
-    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.22s ease, opacity 0.22s ease;
-    &:hover {
-      transform: scale(1.05);
-    }
-    &:active {
-      transform: scale(0.95);
     }
   }
   .transform {
@@ -637,6 +590,17 @@
       box-shadow: 0 0 0 4px var(--accent-soft);
     }
   }
+  .zoom {
+    transition: box-shadow 0.3s ease, border-color 0.25s ease;
+    &:hover {
+      border-color: var(--accent);
+      box-shadow: 0 2px 4px rgba(var(--shade), 0.08), 0 18px 44px var(--halo);
+    }
+  }
+  .lifted {
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px rgba(var(--shade), 0.22);
+  }
   .border-accent {
     border-color: var(--accent);
   }
@@ -772,6 +736,13 @@
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
   }
+  .nudge {
+    transition: padding-left 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease;
+    &:hover {
+      padding-left: 1rem;
+      color: var(--accent);
+    }
+  }
   .pl-3\.5 {
     padding-left: calc(var(--spacing) * 3.5);
   }
@@ -887,6 +858,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  .press {
+    transition: box-shadow 0.25s ease, border-color 0.22s ease, color 0.22s ease, opacity 0.2s ease;
+    &:hover {
+      box-shadow: 0 0 0 3px var(--accent-soft), 0 8px 22px var(--halo);
+    }
+    &:active {
+      opacity: 0.8;
+    }
+  }
   .opacity-50 {
     opacity: 50%;
   }
@@ -976,6 +956,7 @@
   --glow-1: #efe2b0;
   --glow-2: #e4d4a0;
   --shade: 19, 33, 53;
+  --halo: rgba(184, 131, 42, 0.3);
 }
 .dark {
   --canvas: #0a1322;
@@ -995,6 +976,7 @@
   --glow-1: #15294f;
   --glow-2: #1c2f5c;
   --shade: 0, 0, 0;
+  --halo: rgba(230, 185, 95, 0.24);
 }
 @layer base {
   *, ::before, ::after {
@@ -1065,31 +1047,25 @@
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(14px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 @keyframes scale-in {
   from {
     opacity: 0;
-    transform: scale(0.94);
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 @keyframes slide-in {
   from {
     opacity: 0;
-    transform: translateX(32px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 @keyframes float {

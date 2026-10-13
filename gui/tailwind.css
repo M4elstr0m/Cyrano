@@ -20,6 +20,7 @@
   --glow-1: #efe2b0;
   --glow-2: #e4d4a0;
   --shade: 19, 33, 53;
+  --halo: rgba(184, 131, 42, 0.3);
 }
 
 .dark {
@@ -40,6 +41,7 @@
   --glow-1: #15294f;
   --glow-2: #1c2f5c;
   --shade: 0, 0, 0;
+  --halo: rgba(230, 185, 95, 0.24);
 }
 
 @theme inline {
@@ -72,18 +74,18 @@
   }
 
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes scale-in {
-    from { opacity: 0; transform: scale(0.94); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes slide-in {
-    from { opacity: 0; transform: translateX(32px); }
-    to { opacity: 1; transform: translateX(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes float {
@@ -137,36 +139,36 @@
 
 @utility zoom {
   transition:
-    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
     border-color 0.25s ease;
 
   &:hover {
-    transform: scale(1.025);
     border-color: var(--accent);
-  }
-
-  &:active {
-    transform: scale(0.99);
+    box-shadow:
+      0 2px 4px rgba(var(--shade), 0.08),
+      0 18px 44px var(--halo);
   }
 }
 
 @utility press {
   transition:
-    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.25s ease,
     border-color 0.22s ease,
-    opacity 0.22s ease;
+    color 0.22s ease,
+    opacity 0.2s ease;
 
   &:hover {
-    transform: scale(1.05);
+    box-shadow:
+      0 0 0 3px var(--accent-soft),
+      0 8px 22px var(--halo);
   }
 
   &:active {
-    transform: scale(0.95);
+    opacity: 0.8;
   }
 }
 
 @utility lifted {
-  transform: scale(1.02);
   border-color: var(--accent);
   box-shadow: 0 16px 40px rgba(var(--shade), 0.22);
 }
@@ -192,11 +194,11 @@
 
 @utility nudge {
   transition:
-    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+    padding-left 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
     color 0.2s ease;
 
   &:hover {
-    transform: translateX(4px);
+    padding-left: 1rem;
     color: var(--accent);
   }
 }
