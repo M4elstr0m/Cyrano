@@ -1,6 +1,6 @@
 use super::{
-    action_bar::ActionBar, assets_section::AssetsSection, profile_picker::ProfilePicker,
-    session::use_session,
+    action_bar::ActionBar, assets_section::AssetsSection, form::CvForm,
+    profile_picker::ProfilePicker, session::use_session,
 };
 use crate::{
     components::{Button, Size, Variant},
@@ -34,6 +34,9 @@ pub fn SettingsPane() -> Element {
             div { class: "flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto p-6",
                 ProfilePicker {}
                 AssetsSection {}
+                if session.active.read().is_some() {
+                    CvForm {}
+                }
             }
             ActionBar {}
         }
