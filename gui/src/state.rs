@@ -19,6 +19,12 @@ pub struct Notice {
     pub reveal: Option<PathBuf>,
 }
 
+#[derive(Clone, PartialEq)]
+pub enum Screen {
+    Home,
+    Editor(String),
+}
+
 #[derive(Clone, Copy, PartialEq)]
 pub struct AppState {
     pub preferences: Signal<Preferences>,
@@ -26,6 +32,8 @@ pub struct AppState {
     pub profiles: Signal<profile::Store>,
     pub notices: Signal<Vec<Notice>>,
     pub settings_open: Signal<bool>,
+    pub screen: Signal<Screen>,
+    pub opened: Signal<Vec<String>>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -66,7 +74,21 @@ impl AppState {
             profiles: Signal::new(profiles),
             notices: Signal::new(notices),
             settings_open: Signal::new(false),
+            screen: Signal::new(Screen::Home),
+            opened: Signal::new(Vec::new()),
         })
+    }
+
+    pub fn open_template(mut self, folder: String) {
+        if !self.opened.read().contains(&folder) {
+            self.opened.write().push(folder.clone());
+        }
+
+        self.screen.set(Screen::Editor(folder));
+    }
+
+    pub fn go_home(mut self) {
+        self.screen.set(Screen::Home);
     }
 
     pub fn theme(&self) -> Theme {
