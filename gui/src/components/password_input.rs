@@ -26,7 +26,7 @@ pub fn PasswordInput(
                     }
                 }
                 input {
-                    class: "w-full bg-transparent px-3.5 py-2.5 text-sm outline-none {text_class}",
+                    class: "relative z-10 w-full bg-transparent px-3.5 py-2.5 text-sm outline-none {text_class}",
                     r#type: "text",
                     value,
                     autofocus,

@@ -19,7 +19,7 @@ pub fn TextArea(
                     }
                 }
                 textarea {
-                    class: "min-h-24 w-full bg-transparent px-3.5 py-2.5 text-sm text-ink outline-none",
+                    class: "relative z-10 min-h-24 w-full bg-transparent px-3.5 py-2.5 text-sm text-ink outline-none",
                     rows: 4,
                     value,
                     oninput: move |event| oninput.call(event.value()),
