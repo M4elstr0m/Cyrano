@@ -8,6 +8,7 @@ pub fn TextInput(
     value: String,
     #[props(default)] placeholder: String,
     #[props(default)] password: bool,
+    #[props(default)] autofocus: bool,
     oninput: EventHandler<String>,
     #[props(default)] onenter: EventHandler<()>,
 ) -> Element {
@@ -21,6 +22,7 @@ pub fn TextInput(
                 r#type: kind,
                 value,
                 placeholder,
+                autofocus,
                 oninput: move |event| oninput.call(event.value()),
                 onkeydown: move |event| {
                     if event.key() == Key::Enter {

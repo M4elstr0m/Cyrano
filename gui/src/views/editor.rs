@@ -9,6 +9,7 @@ use std::path::PathBuf;
 mod action_bar;
 mod preview_pane;
 mod session;
+mod unlock_dialog;
 mod settings_pane;
 
 use preview_pane::PreviewPane;
