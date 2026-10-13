@@ -922,51 +922,37 @@
   }
   .hover\:border-accent {
     &:hover {
-      @media (hover: hover) {
-        border-color: var(--accent);
-      }
+      border-color: var(--accent);
     }
   }
   .hover\:bg-accent-soft {
     &:hover {
-      @media (hover: hover) {
-        background-color: var(--accent-soft);
-      }
+      background-color: var(--accent-soft);
     }
   }
   .hover\:bg-danger {
     &:hover {
-      @media (hover: hover) {
-        background-color: var(--danger);
-      }
+      background-color: var(--danger);
     }
   }
   .hover\:text-accent {
     &:hover {
-      @media (hover: hover) {
-        color: var(--accent);
-      }
+      color: var(--accent);
     }
   }
   .hover\:text-danger {
     &:hover {
-      @media (hover: hover) {
-        color: var(--danger);
-      }
+      color: var(--danger);
     }
   }
   .hover\:text-ink {
     &:hover {
-      @media (hover: hover) {
-        color: var(--ink);
-      }
+      color: var(--ink);
     }
   }
   .hover\:text-white {
     &:hover {
-      @media (hover: hover) {
-        color: var(--color-white);
-      }
+      color: var(--color-white);
     }
   }
 }

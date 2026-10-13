@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant hover (&:hover);
+
 :root {
   --canvas: #f4eed7;
   --surface: #fbf8ea;
