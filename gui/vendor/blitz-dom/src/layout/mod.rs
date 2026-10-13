@@ -197,7 +197,11 @@ impl LayoutPartialTree for BaseDocument {
                     }
 
                     if *element_data.name.local == *"input" {
-                        match element_data.attr(local_name!("type")) {
+                        let input_type = element_data
+                            .attr(local_name!("type"))
+                            .map(|value| value.to_owned());
+
+                        match input_type.as_deref() {
                             // if the input type is hidden, hide it
                             Some("hidden") => {
                                 node.style.display = Display::None;
@@ -226,13 +230,38 @@ impl LayoutPartialTree for BaseDocument {
                                 );
                             }
                             None | Some("text" | "password" | "email") => {
+                                let line_height = resolved_line_height.unwrap_or(16.0);
+                                let scale = tree.viewport.scale_f64() as f32;
+                                let font_ctx = &tree.font_ctx;
+                                let layout_ctx = &mut tree.layout_ctx;
+                                let input = element_data.text_input_data_mut();
+
                                 return compute_leaf_layout(
                                     inputs,
                                     &node.style,
                                     resolve_calc_value,
-                                    |_known_size, _available_space| taffy::Size {
-                                        width: 300.0,
-                                        height: resolved_line_height.unwrap_or(16.0),
+                                    |known_size, available_space| {
+                                        let width = known_size.width.unwrap_or(
+                                            match available_space.width {
+                                                AvailableSpace::Definite(width) => width,
+                                                _ => 300.0,
+                                            },
+                                        );
+                                        let mut height = line_height;
+
+                                        if let Some(input) = input {
+                                            input.editor.set_width(Some(width * scale));
+                                            input.editor.refresh_layout(
+                                                &mut font_ctx.lock().unwrap(),
+                                                layout_ctx,
+                                            );
+
+                                            if let Some(layout) = input.editor.try_layout() {
+                                                height = height.max(layout.height() / scale);
+                                            }
+                                        }
+
+                                        taffy::Size { width, height }
                                     },
                                 );
                             }
