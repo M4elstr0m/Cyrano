@@ -1,11 +1,23 @@
 use super::Error;
 use base64::{Engine, engine::general_purpose::STANDARD};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct Asset {
     name: String,
     bytes: Vec<u8>,
+}
+
+impl Serialize for Asset {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.serialize_str(&self.name)
+    }
+}
+
+impl<'de> Deserialize<'de> for Asset {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        Ok(Self::new(String::deserialize(deserializer)?, Vec::new()))
+    }
 }
 
 impl Asset {
