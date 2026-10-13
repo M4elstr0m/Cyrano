@@ -23,7 +23,7 @@ pub fn Home() -> Element {
             div { class: "mx-auto flex max-w-6xl flex-col gap-10 px-8 py-12",
                 div { class: "flex items-end justify-between gap-6",
                     div { class: "flex items-center gap-6",
-                        Logo { class: "animate-float size-24", large: true }
+                        Logo { class: "size-24", large: true }
                         div { class: "animate-fade-up flex flex-col gap-2",
                             h1 { class: "text-4xl font-bold tracking-tight", "Choose a template" }
                             p { class: "max-w-xl text-base text-soft",
