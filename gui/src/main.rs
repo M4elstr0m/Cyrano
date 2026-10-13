@@ -1,42 +1,55 @@
-use dioxus::prelude::*;
+use dioxus::{
+    native::{Config, LogicalSize, WindowAttributes},
+    prelude::*,
+};
+use route::Route;
+use state::AppState;
+use views::Fatal;
 
 mod components;
 mod preferences;
+mod route;
 mod state;
+mod text;
+mod views;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
-const MAIN_CSS: Asset = asset!("/assets/main.css");
-const HEADER_SVG: Asset = asset!("/assets/header.svg");
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
 fn main() {
-    dioxus::launch(App);
+    let window = WindowAttributes::default()
+        .with_title("Cyrano")
+        .with_inner_size(LogicalSize::new(1360.0, 860.0));
+
+    dioxus::LaunchBuilder::new()
+        .with_cfg(Config::new().with_window_attributes(window))
+        .launch(App);
 }
 
 #[component]
 fn App() -> Element {
-    rsx! {
-        document::Link { rel: "icon", href: FAVICON }
-        document::Link { rel: "stylesheet", href: MAIN_CSS } document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-        Hero {}
+    let state = use_hook(|| AppState::load().map_err(|error| error.to_string()));
 
+    match state {
+        Ok(state) => rsx! {
+            Root { state }
+        },
+        Err(message) => rsx! {
+            Fatal { message }
+        },
     }
 }
 
 #[component]
-pub fn Hero() -> Element {
+fn Root(state: AppState) -> Element {
+    use_context_provider(|| state);
+    let theme = state.theme().class();
+
     rsx! {
-        div {
-            id: "hero",
-            img { src: HEADER_SVG, id: "header" }
-            div { id: "links",
-                a { href: "https://dioxuslabs.com/learn/0.7/", "📚 Learn Dioxus" }
-                a { href: "https://dioxuslabs.com/awesome", "🚀 Awesome Dioxus" }
-                a { href: "https://github.com/dioxus-community/", "📡 Community Libraries" }
-                a { href: "https://github.com/DioxusLabs/sdk", "⚙️ Dioxus Development Kit" }
-                a { href: "https://marketplace.visualstudio.com/items?itemName=DioxusLabs.dioxus", "💫 VSCode Extension" }
-                a { href: "https://discord.gg/XgGxMSkvUM", "👋 Community Discord" }
-            }
+        document::Link { rel: "icon", href: FAVICON }
+        document::Link { rel: "stylesheet", href: TAILWIND_CSS }
+        div { class: "{theme} h-screen w-screen bg-canvas font-sans text-ink antialiased",
+            Router::<Route> {}
         }
     }
 }
