@@ -1,9 +1,11 @@
 use dioxus::prelude::*;
+use education::EducationSection;
 use experience::ExperienceSection;
 use identity::IdentitySection;
 use links::LinksSection;
 
 mod date_range;
+mod education;
 mod experience;
 mod identity;
 mod links;
@@ -17,5 +19,6 @@ pub fn CvForm() -> Element {
         IdentitySection {}
         LinksSection {}
         ExperienceSection {}
+        EducationSection {}
     }
 }
