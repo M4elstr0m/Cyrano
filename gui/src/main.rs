@@ -49,7 +49,7 @@ fn Root(state: AppState) -> Element {
     rsx! {
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-        div { class: "{theme} h-screen w-screen bg-canvas font-sans text-ink antialiased",
+        div { class: "{theme} h-screen w-screen bg-glow font-sans text-ink antialiased",
             Shell {}
         }
     }

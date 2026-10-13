@@ -26,7 +26,9 @@ pub fn Section(
                 span { class: "text-soft", "{indicator}" }
             }
             if expanded() {
-                div { class: "flex flex-col gap-4 border-t border-line p-4", {children} }
+                div { class: "animate-fade-in flex flex-col gap-4 border-t border-line p-4",
+                    {children}
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ pub fn PreviewPane() -> Element {
     let preview = session.preview.read();
 
     rsx! {
-        section { class: "min-w-0 flex-1 overflow-y-auto bg-canvas",
+        section { class: "min-w-0 flex-1 overflow-y-auto",
             match &*preview {
                 Preview::Idle => rsx! {
                     Placeholder {

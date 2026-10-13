@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 
-pub const FIELD_CLASS: &str = "w-full rounded-xl border border-line bg-inset px-3.5 py-2.5 text-sm text-ink outline-none focus:border-accent";
+pub const FIELD_CLASS: &str = "w-full rounded-xl border border-line bg-inset px-3.5 py-2.5 text-sm text-ink outline-none ring-focus";
 
 #[component]
 pub fn TextInput(

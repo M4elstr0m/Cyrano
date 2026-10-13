@@ -12,7 +12,7 @@ pub enum Variant {
 impl Variant {
     fn class(self) -> &'static str {
         match self {
-            Variant::Primary => "bg-primary text-on-primary hover:opacity-90",
+            Variant::Primary => "bg-primary text-on-primary shadow-card hover:opacity-90",
             Variant::Secondary => "border border-line bg-inset text-ink hover:bg-line",
             Variant::Ghost => "text-soft hover:bg-inset",
             Variant::Danger => "bg-danger text-white hover:opacity-90",
@@ -55,7 +55,7 @@ pub fn Button(
 
     rsx! {
         button {
-            class: "inline-flex select-none items-center justify-center gap-2 rounded-full font-medium {size_class} {variant_class} {state_class} {class}",
+            class: "inline-flex select-none items-center justify-center gap-2 rounded-full font-medium press {size_class} {variant_class} {state_class} {class}",
             r#type: "button",
             disabled,
             onclick: move |event| {

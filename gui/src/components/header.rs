@@ -13,7 +13,7 @@ pub fn Header() -> Element {
                 class: "flex items-center gap-3",
                 r#type: "button",
                 onclick: move |_| state.go_home(),
-                span { class: "flex size-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-on-primary",
+                span { class: "flex size-9 items-center justify-center rounded-xl bg-brand text-sm font-bold text-white shadow-card",
                     "C"
                 }
                 span { class: "text-base font-semibold tracking-tight", "Cyrano" }

@@ -26,7 +26,7 @@ fn Toast(notice: Notice, index: usize) -> Element {
     let tone_class = notice.tone.text_class();
 
     rsx! {
-        div { class: "flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4 shadow-overlay",
+        div { class: "animate-slide-in flex flex-col gap-3 rounded-2xl border border-line bg-surface p-4 shadow-overlay",
             p { class: "break-words text-sm {tone_class}", "{notice.message}" }
             div { class: "flex justify-end gap-2",
                 if let Some(path) = notice.reveal.clone() {

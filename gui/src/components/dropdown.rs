@@ -14,7 +14,7 @@ pub fn Dropdown(#[props(default)] class: String, trigger: Element, children: Ele
         div { class: "flex flex-col gap-2 {class}",
             div { class: "flex flex-col", onclick: move |_| open.set(!open()), {trigger} }
             if open() {
-                div { class: "flex flex-col gap-1 rounded-2xl border border-line bg-surface p-2",
+                div { class: "animate-fade-up flex flex-col gap-1 rounded-2xl border border-line bg-surface p-2",
                     {children}
                 }
             }
