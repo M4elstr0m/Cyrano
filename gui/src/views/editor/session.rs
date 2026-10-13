@@ -3,7 +3,6 @@ use cyrano_core::cv_data::CvData;
 use dioxus::prelude::*;
 use std::{path::PathBuf, time::Duration};
 
-
 mod jobs;
 mod profile;
 
@@ -128,5 +127,4 @@ impl Session {
             }
         }
     }
-
 }

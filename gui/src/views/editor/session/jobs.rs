@@ -40,7 +40,9 @@ impl Session {
     }
 
     pub fn run_preview(mut self) {
-        let Some(request) = self.request() else { return };
+        let Some(request) = self.request() else {
+            return;
+        };
 
         self.preview.set(Preview::Rendering);
 
@@ -54,7 +56,9 @@ impl Session {
     }
 
     pub fn run_export(mut self) {
-        let Some(request) = self.request() else { return };
+        let Some(request) = self.request() else {
+            return;
+        };
 
         self.exporting.set(true);
 
