@@ -1,10 +1,11 @@
 use crate::{
-    components::{Badge, Button, Tone, Variant},
+    components::{Badge, Button, ConfirmDialog, Size, Tone, Variant},
     route::Route,
     state::use_app_state,
     text::humanize,
 };
 use dioxus::prelude::*;
+use std::path::PathBuf;
 
 mod empty;
 use empty::EmptyTemplates;
@@ -12,6 +13,7 @@ use empty::EmptyTemplates;
 #[component]
 pub fn Home() -> Element {
     let state = use_app_state();
+    let mut pending = use_signal(|| None::<(PathBuf, String)>);
     let templates = state.templates.read();
 
     let mut entries = templates.all_templates();
@@ -48,10 +50,27 @@ pub fn Home() -> Element {
                                     .iter()
                                     .map(|asset| asset.name().to_owned())
                                     .collect::<Vec<_>>(),
+                                ondelete: {
+                                    let dir = dir.to_path_buf();
+                                    let name = template.name.clone();
+                                    move |_| pending.set(Some((dir.clone(), name.clone())))
+                                },
                             }
                         }
                     }
                 }
+            }
+        }
+        if let Some((dir, name)) = pending() {
+            ConfirmDialog {
+                title: "Delete {name}?",
+                message: "The template folder will be permanently deleted. This cannot be undone.",
+                confirm_label: "Delete template",
+                onconfirm: move |_| {
+                    pending.set(None);
+                    state.delete_template(&dir);
+                },
+                onclose: move |_| pending.set(None),
             }
         }
     }
@@ -63,6 +82,7 @@ fn TemplateCard(
     name: String,
     description: Option<String>,
     assets: Vec<String>,
+    ondelete: EventHandler<()>,
 ) -> Element {
     let navigator = use_navigator();
     let initial: String = name.chars().take(1).flat_map(char::to_uppercase).collect();
@@ -92,8 +112,19 @@ fn TemplateCard(
                     }
                 }
             }
-            span { class: "mt-auto self-start rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary",
-                "Use template"
+            div { class: "mt-auto flex items-center justify-between gap-3",
+                span { class: "rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary",
+                    "Use template"
+                }
+                Button {
+                    variant: Variant::Ghost,
+                    size: Size::Sm,
+                    onclick: move |event: MouseEvent| {
+                        event.stop_propagation();
+                        ondelete.call(());
+                    },
+                    "Delete"
+                }
             }
         }
     }
