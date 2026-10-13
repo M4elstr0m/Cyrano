@@ -163,6 +163,12 @@
   }
 }
 
+@utility lifted {
+  transform: scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 16px 40px rgba(var(--shade), 0.22);
+}
+
 @utility turn {
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

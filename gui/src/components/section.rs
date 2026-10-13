@@ -9,7 +9,6 @@ pub fn Section(
     children: Element,
 ) -> Element {
     let mut expanded = use_signal(|| open);
-    let indicator = if expanded() { "−" } else { "+" };
 
     rsx! {
         div { class: "flex flex-col rounded-2xl border border-line bg-surface",
@@ -23,10 +22,13 @@ pub fn Section(
                         Badge { "{count}" }
                     }
                 }
-                span { class: "text-soft", "{indicator}" }
+                span {
+                    class: "turn mb-1 block size-2 border-b-2 border-r-2 border-current text-soft",
+                    style: if expanded() { "transform: rotate(225deg)" } else { "transform: rotate(45deg)" },
+                }
             }
             if expanded() {
-                div { class: "animate-fade-in flex flex-col gap-4 border-t border-line p-4",
+                div { class: "animate-fade-up flex flex-col gap-4 border-t border-line p-4",
                     {children}
                 }
             }

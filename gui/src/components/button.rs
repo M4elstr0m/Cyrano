@@ -6,6 +6,8 @@ pub enum Variant {
     Primary,
     Secondary,
     Ghost,
+    Accent,
+    DangerGhost,
     Danger,
 }
 
@@ -15,6 +17,8 @@ impl Variant {
             Variant::Primary => "bg-primary text-on-primary shadow-card",
             Variant::Secondary => "border border-line bg-surface text-ink hover:border-accent",
             Variant::Ghost => "text-soft hover:text-ink",
+            Variant::Accent => "border border-accent text-accent",
+            Variant::DangerGhost => "text-soft hover:text-danger",
             Variant::Danger => "bg-danger text-white",
         }
     }

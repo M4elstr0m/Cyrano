@@ -260,6 +260,9 @@
   .mt-auto {
     margin-top: auto;
   }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
+  }
   .block {
     display: block;
   }
@@ -278,9 +281,17 @@
   .inline-flex {
     display: inline-flex;
   }
+  .size-1 {
+    width: calc(var(--spacing) * 1);
+    height: calc(var(--spacing) * 1);
+  }
   .size-1\.5 {
     width: calc(var(--spacing) * 1.5);
     height: calc(var(--spacing) * 1.5);
+  }
+  .size-2 {
+    width: calc(var(--spacing) * 2);
+    height: calc(var(--spacing) * 2);
   }
   .size-2\.5 {
     width: calc(var(--spacing) * 2.5);
@@ -417,6 +428,11 @@
   .shrink-0 {
     flex-shrink: 0;
   }
+  .lifted {
+    transform: scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px rgba(var(--shade), 0.22);
+  }
   .zoom {
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
     &:hover {
@@ -463,6 +479,9 @@
   }
   .cursor-ew-resize {
     cursor: ew-resize;
+  }
+  .cursor-grab {
+    cursor: grab;
   }
   .cursor-nesw-resize {
     cursor: nesw-resize;
@@ -527,6 +546,9 @@
   .gap-10 {
     gap: calc(var(--spacing) * 10);
   }
+  .gap-\[3px\] {
+    gap: 3px;
+  }
   .self-start {
     align-self: flex-start;
   }
@@ -574,9 +596,17 @@
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
   }
+  .border-r-2 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 2px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
+  }
+  .border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 2px;
   }
   .border-l {
     border-left-style: var(--tw-border-style);
@@ -601,6 +631,9 @@
       border-color: var(--accent);
       box-shadow: 0 0 0 4px var(--accent-soft);
     }
+  }
+  .border-accent {
+    border-color: var(--accent);
   }
   .border-current {
     border-color: currentcolor;
@@ -637,6 +670,9 @@
   }
   .bg-primary {
     background-color: var(--primary);
+  }
+  .bg-soft {
+    background-color: var(--soft);
   }
   .bg-surface {
     background-color: var(--surface);
@@ -704,6 +740,9 @@
   .py-1\.5 {
     padding-block: calc(var(--spacing) * 1.5);
   }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
   }
@@ -724,6 +763,9 @@
   }
   .pr-3 {
     padding-right: calc(var(--spacing) * 3);
+  }
+  .pb-1 {
+    padding-bottom: calc(var(--spacing) * 1);
   }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
@@ -879,6 +921,9 @@
   }
   .bg-sheen {
     background: linear-gradient(160deg, var(--accent-soft), var(--surface) 75%);
+  }
+  .turn {
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .hover\:border-accent {
     &:hover {
