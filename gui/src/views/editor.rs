@@ -6,11 +6,14 @@ use crate::{
 use dioxus::prelude::*;
 use std::path::PathBuf;
 
+mod action_bar;
 mod preview_pane;
 mod session;
+mod settings_pane;
 
 use preview_pane::PreviewPane;
 use session::{Session, use_autosave};
+use settings_pane::SettingsPane;
 
 #[component]
 pub fn Editor(template: String) -> Element {
@@ -39,6 +42,7 @@ fn Workspace(dir: PathBuf) -> Element {
     rsx! {
         div { class: "flex h-full",
             PreviewPane {}
+            SettingsPane {}
         }
     }
 }
