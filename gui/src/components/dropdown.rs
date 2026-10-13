@@ -31,7 +31,7 @@ pub fn DropdownItem(
 
     rsx! {
         button {
-            class: "flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-sm hover:bg-inset",
+            class: "flex w-full items-center justify-between gap-3 fade-hover rounded-xl px-3 py-2.5 text-left text-sm hover:bg-inset",
             r#type: "button",
             onclick: move |event| {
                 menu.open.set(false);

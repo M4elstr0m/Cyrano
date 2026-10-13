@@ -55,11 +55,11 @@ fn AssetRow(asset: AssetEntry) -> Element {
         div { class: "flex items-center gap-4",
             if let Some(uri) = &asset.uri {
                 img {
-                    class: "size-14 shrink-0 rounded-2xl border border-line bg-inset",
+                    class: "size-14 shrink-0 rounded-full border border-line bg-inset object-cover",
                     src: uri.as_str(),
                 }
             } else {
-                div { class: "size-14 shrink-0 rounded-2xl border border-line bg-inset" }
+                div { class: "size-14 shrink-0 rounded-full border border-line bg-inset object-cover" }
             }
             div { class: "flex min-w-0 flex-1 flex-col gap-1",
                 span { class: "truncate text-sm font-medium", "{label}" }

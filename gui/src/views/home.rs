@@ -1,5 +1,5 @@
 use crate::{
-    components::{Badge, Button, ConfirmDialog, Size, Tone, Variant},
+    components::{Badge, Button, ConfirmDialog, Logo, Size, Tone, Variant},
     state::use_app_state,
     text::humanize,
 };
@@ -22,10 +22,13 @@ pub fn Home() -> Element {
         div { class: "h-full w-full overflow-y-auto",
             div { class: "mx-auto flex max-w-6xl flex-col gap-10 px-8 py-12",
                 div { class: "flex items-end justify-between gap-6",
-                    div { class: "flex flex-col gap-2",
-                        h1 { class: "text-4xl font-semibold tracking-tight", "Choose a template" }
-                        p { class: "max-w-xl text-base text-soft",
-                            "Pick a layout for your CV, then fill in your profile and preview the result before exporting it."
+                    div { class: "flex items-center gap-6",
+                        Logo { class: "animate-float size-24", large: true }
+                        div { class: "animate-fade-up flex flex-col gap-2",
+                            h1 { class: "text-4xl font-bold tracking-tight", "Choose a template" }
+                            p { class: "max-w-xl text-base text-soft",
+                                "Pick a layout for your CV, then fill in your profile and preview the result before exporting it."
+                            }
                         }
                     }
                     Button {
@@ -45,10 +48,10 @@ pub fn Home() -> Element {
                                 name: template.name.clone(),
                                 description: template.description.clone(),
                                 assets: template
-                                    .required_assets
-                                    .iter()
-                                    .map(|asset| asset.to_owned())
-                                    .collect::<Vec<_>>(),
+                                                                    .required_assets
+                                                                    .iter()
+                                                                    .map(|asset| asset.to_owned())
+                                                                    .collect::<Vec<_>>(),
                                 ondelete: {
                                     let dir = dir.to_path_buf();
                                     let name = template.name.clone();
@@ -88,7 +91,7 @@ fn TemplateCard(
 
     rsx! {
         div {
-            class: "animate-fade-up lift flex w-80 cursor-pointer flex-col gap-5 rounded-[28px] border border-line bg-surface p-4 shadow-card",
+            class: "animate-fade-up lift flex w-80 cursor-pointer flex-col rounded-[28px] border border-line bg-surface p-4 shadow-card",
             onclick: move |_| state.open_template(folder.clone()),
             div { class: "bg-sheen flex h-44 items-center justify-center rounded-2xl border border-line",
                 div { class: "flex h-32 w-24 flex-col gap-2 rounded-lg bg-white p-3 shadow-page",
@@ -102,23 +105,21 @@ fn TemplateCard(
                     span { class: "mt-auto text-[10px] font-bold text-[#2f6bff]", "{initial}" }
                 }
             }
-            div { class: "flex flex-col gap-1.5 px-2",
+            div { class: "mt-5 flex flex-col gap-1.5 px-2",
                 h2 { class: "text-lg font-semibold tracking-tight", "{name}" }
                 if let Some(description) = description {
                     p { class: "text-sm text-soft", "{description}" }
                 }
             }
             if !assets.is_empty() {
-                div { class: "flex flex-wrap items-center gap-2 px-2",
+                div { class: "mt-4 flex flex-wrap items-center gap-2 px-2",
                     for asset in assets {
                         Badge { key: "{asset}", tone: Tone::Accent, "{humanize(&asset)}" }
                     }
                 }
             }
-            div { class: "mt-auto flex items-center justify-between gap-3 px-2 pb-2",
-                span { class: "rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary",
-                    "Use template"
-                }
+            div { class: "mt-auto flex items-center justify-between gap-3 px-2 pb-2 pt-5",
+                Button { "Use template" }
                 Button {
                     variant: Variant::Ghost,
                     size: Size::Sm,

@@ -1,5 +1,5 @@
 use super::session::{Preview, use_session};
-use crate::components::{Card, Tone};
+use crate::components::{Card, Logo, Tone};
 use dioxus::prelude::*;
 
 #[component]
@@ -27,7 +27,7 @@ pub fn PreviewPane() -> Element {
                         for (index, page) in pages.iter().enumerate() {
                             img {
                                 key: "{index}",
-                                class: "w-full rounded-lg bg-white shadow-page",
+                                class: "animate-fade-up block w-full rounded-lg shadow-page",
                                 src: page.as_str(),
                             }
                         }
@@ -44,7 +44,8 @@ fn Placeholder(title: String, detail: String, #[props(default)] tone: Tone) -> E
 
     rsx! {
         div { class: "flex h-full items-center justify-center p-10",
-            Card { class: "flex max-w-sm flex-col gap-2 p-8 text-center",
+            Card { class: "flex max-w-sm flex-col items-center gap-3 p-8 text-center",
+                Logo { class: "animate-float size-20", large: true }
                 h2 { class: "text-lg font-semibold {tone_class}", "{title}" }
                 p { class: "break-words text-sm text-soft", "{detail}" }
             }

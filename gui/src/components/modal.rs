@@ -16,7 +16,7 @@ pub fn Modal(
                 div { class: "flex items-center justify-between",
                     h2 { class: "text-lg font-semibold", "{title}" }
                     button {
-                        class: "rounded-full px-2.5 py-1 text-lg leading-none text-soft hover:bg-inset",
+                        class: "rounded-full px-2.5 py-1 text-lg leading-none fade-hover text-soft hover:bg-inset hover:text-ink",
                         r#type: "button",
                         onclick: move |_| onclose.call(()),
                         "×"

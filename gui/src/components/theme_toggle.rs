@@ -27,7 +27,7 @@ fn ThemeOption(label: String, active: bool, onclick: EventHandler<MouseEvent>) -
     let state_class = if active {
         "bg-primary text-on-primary"
     } else {
-        "text-soft hover:text-ink"
+        "fade-hover text-soft hover:text-ink"
     };
 
     rsx! {
