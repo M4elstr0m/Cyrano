@@ -51,13 +51,29 @@ pub fn PasswordInput(
 #[component]
 fn Eye(crossed: bool) -> Element {
     rsx! {
-        div { class: "relative flex h-4 w-6 items-center justify-center",
-            span { class: "block h-3.5 w-6 rounded-full border-2 border-current" }
-            span { class: "absolute block size-1.5 rounded-full bg-current" }
+        svg {
+            width: "24",
+            height: "16",
+            view_box: "0 0 24 16",
+            fill: "none",
+            path {
+                d: "M1.5 8 C4.5 3 8 1.5 12 1.5 C16 1.5 19.5 3 22.5 8 C19.5 13 16 14.5 12 14.5 C8 14.5 4.5 13 1.5 8 Z",
+                stroke: "currentColor",
+                stroke_width: "1.8",
+                stroke_linejoin: "round",
+            }
+            circle {
+                cx: "12",
+                cy: "8",
+                r: "2.6",
+                fill: "currentColor",
+            }
             if crossed {
-                span {
-                    class: "absolute block h-0.5 w-7 rounded-full bg-current",
-                    style: "transform: rotate(-35deg)",
+                path {
+                    d: "M3.5 14.5 L20.5 1.5",
+                    stroke: "currentColor",
+                    stroke_width: "1.8",
+                    stroke_linecap: "round",
                 }
             }
         }
