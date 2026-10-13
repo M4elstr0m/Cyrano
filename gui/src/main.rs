@@ -8,6 +8,7 @@ use views::Fatal;
 
 mod components;
 mod preferences;
+mod render;
 mod route;
 mod state;
 mod text;
