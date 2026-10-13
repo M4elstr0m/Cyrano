@@ -463,7 +463,7 @@
     border-collapse: collapse;
   }
   .control {
-    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease, border-color 0.4s ease;
     &:hover {
       transform: scale(1.08);
     }
@@ -631,7 +631,7 @@
     border-left-width: 1px;
   }
   .ring-within {
-    transition: box-shadow 0.2s ease, background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    transition: box-shadow 0.2s ease, background-color 0.4s ease, border-color 0.4s ease;
     &:hover {
       border-color: var(--soft);
     }
@@ -641,7 +641,7 @@
     }
   }
   .zoom {
-    transition: box-shadow 0.3s ease, background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    transition: box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
     &:hover {
       border-color: var(--accent);
       box-shadow: 0 2px 4px rgba(var(--shade), 0.08), 0 18px 44px var(--halo);
@@ -790,7 +790,7 @@
     padding-bottom: calc(var(--spacing) * 2);
   }
   .nudge {
-    transition: padding-left 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    transition: padding-left 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease, border-color 0.4s ease;
     &:hover {
       padding-left: 1rem;
       color: var(--accent);
@@ -978,6 +978,9 @@
   .bg-sheen {
     background: linear-gradient(160deg, var(--accent-soft), var(--surface) 75%);
   }
+  .fade-root {
+    transition: color 0.4s ease, border-color 0.4s ease;
+  }
   .turn {
     transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
@@ -1074,7 +1077,10 @@
     font-weight: inherit;
   }
   *, ::before, ::after {
-    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+  [class*="text-soft"], [class*="text-ink"], [class*="text-accent"], [class*="text-danger"], [class*="text-success"], [class*="text-on-primary"] {
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
   }
   html {
     font-weight: 500;

@@ -87,7 +87,7 @@ fn Root(state: AppState) -> Element {
         document::Link { rel: "preload", href: RALEWAY }
         document::Link { rel: "stylesheet", href: FONTS_CSS }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-        div { class: "{theme} {frame} relative h-screen w-screen bg-glow font-sans text-ink antialiased",
+        div { class: "{theme} {frame} fade-root relative h-screen w-screen bg-glow font-sans text-ink antialiased",
             Shell {}
             ResizeHandles {}
         }

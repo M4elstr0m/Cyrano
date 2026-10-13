@@ -121,8 +121,19 @@
   ::after {
     transition:
       background-color 0.4s ease,
-      color 0.4s ease,
       border-color 0.4s ease;
+  }
+
+  [class*="text-soft"],
+  [class*="text-ink"],
+  [class*="text-accent"],
+  [class*="text-danger"],
+  [class*="text-success"],
+  [class*="text-on-primary"] {
+    transition:
+      background-color 0.4s ease,
+      border-color 0.4s ease,
+      color 0.4s ease;
   }
 
   html {
@@ -150,7 +161,6 @@
   transition:
     box-shadow 0.3s ease,
     background-color 0.4s ease,
-    color 0.4s ease,
     border-color 0.4s ease;
 
   &:hover {
@@ -189,7 +199,6 @@
   transition:
     transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
     background-color 0.4s ease,
-    color 0.4s ease,
     border-color 0.4s ease;
 
   &:hover {
@@ -201,6 +210,12 @@
   }
 }
 
+@utility fade-root {
+  transition:
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
 @utility turn {
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -209,7 +224,6 @@
   transition:
     padding-left 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
     background-color 0.4s ease,
-    color 0.4s ease,
     border-color 0.4s ease;
 
   &:hover {
@@ -234,7 +248,6 @@
   transition:
     box-shadow 0.2s ease,
     background-color 0.4s ease,
-    color 0.4s ease,
     border-color 0.4s ease;
 
   &:hover {
@@ -251,7 +264,6 @@
   transition:
     box-shadow 0.2s ease,
     background-color 0.4s ease,
-    color 0.4s ease,
     border-color 0.4s ease;
 
   &:hover {
