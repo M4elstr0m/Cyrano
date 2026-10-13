@@ -1,6 +1,7 @@
 mod editor;
 mod fatal;
 mod home;
+mod settings_dialog;
 mod shell;
 
 pub use editor::Editor;
