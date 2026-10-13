@@ -35,6 +35,7 @@ pub struct AppState {
     pub screen: Signal<Screen>,
     pub opened: Signal<Vec<String>>,
     pub flushers: Signal<Vec<Callback<()>>>,
+    pub maximized: Signal<bool>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -78,6 +79,7 @@ impl AppState {
             screen: Signal::new(Screen::Home),
             opened: Signal::new(Vec::new()),
             flushers: Signal::new(Vec::new()),
+            maximized: Signal::new(false),
         })
     }
 
