@@ -192,6 +192,9 @@
   }
 }
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .absolute {
     position: absolute;
   }
@@ -628,16 +631,6 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 1px;
   }
-  .ring-focus {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    &:hover {
-      border-color: var(--soft);
-    }
-    &:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-soft);
-    }
-  }
   .ring-within {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     &:hover {
@@ -900,6 +893,9 @@
   }
   .opacity-50 {
     opacity: 50%;
+  }
+  .opacity-70 {
+    opacity: 70%;
   }
   .shadow-card {
     box-shadow: 0 1px 2px rgba(var(--shade), 0.08), 0 12px 32px rgba(var(--shade), 0.12);

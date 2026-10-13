@@ -54,6 +54,7 @@ fn ProjectRow(index: usize) -> Element {
             },
             TextInput {
                 label: "Title",
+                placeholder: "e.g. Cyrano",
                 value: item.title,
                 oninput: move |value| {
                     with_item(&mut draft.write().projects, index, |item| item.title = value)
@@ -61,6 +62,7 @@ fn ProjectRow(index: usize) -> Element {
             }
             TextArea {
                 label: "Description",
+                placeholder: "What did you build, and for whom?",
                 value: item.description,
                 oninput: move |value| {
                     with_item(&mut draft.write().projects, index, |item| item.description = value)
@@ -69,6 +71,7 @@ fn ProjectRow(index: usize) -> Element {
             StringListEditor {
                 list: format!("project-skills-{index}"),
                 label: "Skill used",
+                placeholder: "e.g. Rust",
                 add_label: "Add skill",
                 items: item.used_skills,
                 onchange: move |skills| {

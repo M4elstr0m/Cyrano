@@ -12,6 +12,7 @@ pub fn SoftSkillsSection() -> Element {
             StringListEditor {
                 list: "soft-skills",
                 label: "Skill",
+                placeholder: "e.g. Teamwork",
                 add_label: "Add skill",
                 items,
                 onchange: move |items| draft.write().soft_skills = items,
@@ -30,6 +31,7 @@ pub fn HobbiesSection() -> Element {
             StringListEditor {
                 list: "hobbies",
                 label: "Hobby",
+                placeholder: "e.g. Climbing",
                 add_label: "Add hobby",
                 items,
                 onchange: move |items| draft.write().hobbies = items,

@@ -45,6 +45,7 @@ pub fn DateRangeFields(
         div { class: "grid grid-cols-2 gap-3",
             TextInput {
                 label: "Start year",
+                placeholder: "e.g. 2022",
                 value: year_text(Some(start_year)),
                 oninput: move |text: String| {
                     emit((parse_year(&text).unwrap_or_default(), start_month), (end_year, end_month))
@@ -52,6 +53,7 @@ pub fn DateRangeFields(
             }
             TextInput {
                 label: "Start month",
+                placeholder: "1 to 12",
                 value: month_text(start_month),
                 oninput: move |text: String| {
                     emit((start_year, parse_month(&text)), (end_year, end_month))
@@ -59,6 +61,7 @@ pub fn DateRangeFields(
             }
             TextInput {
                 label: "End year (empty if ongoing)",
+                placeholder: "e.g. 2025",
                 value: year_text(end_year),
                 oninput: move |text: String| {
                     emit((start_year, start_month), (parse_year(&text), end_month))
@@ -66,6 +69,7 @@ pub fn DateRangeFields(
             }
             TextInput {
                 label: "End month",
+                placeholder: "1 to 12",
                 value: month_text(end_month),
                 oninput: move |text: String| {
                     emit((start_year, start_month), (end_year, parse_month(&text)))

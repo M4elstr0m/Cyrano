@@ -50,6 +50,7 @@ fn LanguageRow(index: usize) -> Element {
             },
             TextInput {
                 label: "Language",
+                placeholder: "e.g. French",
                 value: language.name,
                 oninput: move |value| {
                     with_item(&mut draft.write().languages, index, |language| language.name = value)
@@ -57,6 +58,7 @@ fn LanguageRow(index: usize) -> Element {
             }
             TextInput {
                 label: "Level",
+                placeholder: "e.g. Native",
                 value: language.level,
                 oninput: move |value| {
                     with_item(&mut draft.write().languages, index, |language| language.level = value)

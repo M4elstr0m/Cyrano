@@ -52,6 +52,7 @@ fn ExperienceRow(index: usize) -> Element {
             },
             TextInput {
                 label: "Role",
+                placeholder: "e.g. Backend Engineer",
                 value: item.title,
                 oninput: move |value| {
                     with_item(&mut draft.write().experience, index, |item| item.title = value)
@@ -59,6 +60,7 @@ fn ExperienceRow(index: usize) -> Element {
             }
             TextInput {
                 label: "Company",
+                placeholder: "e.g. Acme",
                 value: item.company,
                 oninput: move |value| {
                     with_item(&mut draft.write().experience, index, |item| item.company = value)

@@ -50,6 +50,7 @@ fn LinkRow(index: usize) -> Element {
             },
             TextInput {
                 label: "Label",
+                placeholder: "e.g. GitHub",
                 value: link.label,
                 oninput: move |value| {
                     with_item(&mut draft.write().links, index, |link| link.label = value)
@@ -57,6 +58,7 @@ fn LinkRow(index: usize) -> Element {
             }
             TextInput {
                 label: "URL",
+                placeholder: "https://",
                 value: link.url,
                 oninput: move |value| { with_item(&mut draft.write().links, index, |link| link.url = value) },
             }

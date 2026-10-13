@@ -51,6 +51,7 @@ fn SkillGroupRow(index: usize) -> Element {
             },
             TextInput {
                 label: "Category",
+                placeholder: "e.g. Languages",
                 value: group.category,
                 oninput: move |value| {
                     with_item(&mut draft.write().hard_skills, index, |group| group.category = value)
@@ -59,6 +60,7 @@ fn SkillGroupRow(index: usize) -> Element {
             StringListEditor {
                 list: format!("hard-skill-items-{index}"),
                 label: "Skill",
+                placeholder: "e.g. Rust",
                 add_label: "Add skill",
                 items: group.items,
                 onchange: move |items| {

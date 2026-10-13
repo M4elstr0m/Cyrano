@@ -11,6 +11,7 @@ pub fn StringListEditor(
     #[props(into)] list: String,
     #[props(into)] label: String,
     #[props(into)] add_label: String,
+    #[props(default)] placeholder: String,
     items: Vec<String>,
     onchange: EventHandler<Vec<String>>,
 ) -> Element {
@@ -44,6 +45,7 @@ pub fn StringListEditor(
                     div { class: "min-w-0 flex-1",
                         TextInput {
                             label: label.clone(),
+                            placeholder: placeholder.clone(),
                             value: item.clone(),
                             oninput: {
                                 let items = items.clone();

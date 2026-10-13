@@ -38,6 +38,7 @@ pub fn CreateProfileDialog(oncreated: EventHandler<PathBuf>, onclose: EventHandl
             }
             TextInput {
                 label: "Profile name",
+                placeholder: "e.g. My main CV",
                 autofocus: true,
                 value: name(),
                 oninput: move |value| name.set(value),

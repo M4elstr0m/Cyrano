@@ -52,6 +52,7 @@ fn EducationRow(index: usize) -> Element {
             },
             TextInput {
                 label: "Title",
+                placeholder: "e.g. MSc Computer Science",
                 value: item.title,
                 oninput: move |value| {
                     with_item(&mut draft.write().education, index, |item| item.title = value)
@@ -59,6 +60,7 @@ fn EducationRow(index: usize) -> Element {
             }
             TextArea {
                 label: "Description",
+                placeholder: "What did you study?",
                 value: item.description,
                 oninput: move |value| {
                     with_item(&mut draft.write().education, index, |item| item.description = value)
