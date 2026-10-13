@@ -9,6 +9,7 @@ use std::path::PathBuf;
 mod action_bar;
 mod assets_section;
 mod create_profile_dialog;
+mod form;
 mod preview_pane;
 mod profile_picker;
 mod session;
