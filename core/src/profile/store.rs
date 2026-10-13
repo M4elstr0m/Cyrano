@@ -59,7 +59,7 @@ impl Store {
         identity.save(&profile_dir)?;
 
         let salt = crypto::generate_salt()?;
-        let key = crypto::derive_key(&password, &salt)?;
+        let key = crypto::derive_key(password, &salt)?;
 
         let data = CvData::new(name);
 
