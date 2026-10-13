@@ -40,7 +40,7 @@ pub struct Session {
     pub exporting: Signal<bool>,
     pub unlocking: Signal<Option<ProfileEntry>>,
     pub creating: Signal<bool>,
-    pub deleting: Signal<bool>,
+    pub deleting: Signal<Option<ProfileEntry>>,
     pub drag: Signal<Option<Drag>>,
 }
 
@@ -70,7 +70,7 @@ impl Session {
             exporting: Signal::new(false),
             unlocking: Signal::new(None),
             creating: Signal::new(false),
-            deleting: Signal::new(false),
+            deleting: Signal::new(None),
             drag: Signal::new(None),
         }
     }

@@ -45,13 +45,16 @@ impl Session {
         self.clear();
     }
 
-    pub fn delete_active(self) {
-        let Some(dir) = self.active_dir() else { return };
+    pub fn delete_profile(self, dir: PathBuf) {
         let mut profiles = self.state.profiles;
         let result = profiles.write().delete_profile(&dir);
 
         match result {
-            Ok(()) => self.clear(),
+            Ok(()) => {
+                if self.active_dir().as_ref() == Some(&dir) {
+                    self.clear();
+                }
+            }
             Err(error) => self.state.fail(error),
         }
     }

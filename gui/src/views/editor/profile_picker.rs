@@ -44,7 +44,10 @@ pub fn ProfilePicker() -> Element {
                         Button {
                             variant: Variant::Ghost,
                             size: Size::Sm,
-                            onclick: move |_| deleting.set(true),
+                            onclick: {
+                                let target = entries.iter().find(|entry| Some(&entry.dir) == active.as_ref()).cloned();
+                                move |_| deleting.set(target.clone())
+                            },
                             "Delete"
                         }
                     }
@@ -57,18 +60,32 @@ pub fn ProfilePicker() -> Element {
                         span { class: "text-xs text-soft", "Change" }
                     }
                 },
-                for entry in entries {
-                    DropdownItem {
+                for entry in entries.clone() {
+                    div {
                         key: "{entry.dir.display()}",
-                        onclick: {
-                            let entry = entry.clone();
-                            move |_| pick.call(entry.clone())
-                        },
-                        span { class: "truncate", "{entry.name}" }
-                        if entry.unlocked {
-                            Badge { tone: Tone::Success, "Unlocked" }
-                        } else {
-                            Badge { "Locked" }
+                        class: "flex items-center gap-1",
+                        div { class: "min-w-0 flex-1",
+                            DropdownItem {
+                                onclick: {
+                                    let entry = entry.clone();
+                                    move |_| pick.call(entry.clone())
+                                },
+                                span { class: "truncate", "{entry.name}" }
+                                if entry.unlocked {
+                                    Badge { tone: Tone::Success, "Unlocked" }
+                                } else {
+                                    Badge { "Locked" }
+                                }
+                            }
+                        }
+                        Button {
+                            variant: Variant::DangerGhost,
+                            size: Size::Sm,
+                            onclick: {
+                                let entry = entry.clone();
+                                move |_| deleting.set(Some(entry.clone()))
+                            },
+                            "Delete"
                         }
                     }
                 }

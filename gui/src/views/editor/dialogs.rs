@@ -31,16 +31,19 @@ pub fn Dialogs() -> Element {
                 onclose: move |_| creating.set(false),
             }
         }
-        if deleting() {
+        if let Some(entry) = deleting() {
             ConfirmDialog {
-                title: "Delete this profile?",
+                title: format!("Delete {}?", entry.name),
                 message: "The profile and its encrypted data will be permanently deleted. This cannot be undone.",
                 confirm_label: "Delete profile",
-                onconfirm: move |_| {
-                    deleting.set(false);
-                    session.delete_active();
+                onconfirm: {
+                    let entry = entry.clone();
+                    move |_| {
+                        deleting.set(None);
+                        session.delete_profile(entry.dir.clone());
+                    }
                 },
-                onclose: move |_| deleting.set(false),
+                onclose: move |_| deleting.set(None),
             }
         }
     }
