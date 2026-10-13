@@ -1,4 +1,4 @@
-use crate::state::AppState;
+use crate::state::{AppState, ProfileEntry};
 use cyrano_core::cv_data::CvData;
 use dioxus::prelude::*;
 use std::{path::PathBuf, time::Duration};
@@ -32,6 +32,8 @@ pub struct Session {
     pub assets: Signal<Vec<AssetEntry>>,
     pub preview: Signal<Preview>,
     pub exporting: Signal<bool>,
+    pub unlocking: Signal<Option<ProfileEntry>>,
+    pub creating: Signal<bool>,
 }
 
 pub fn use_session() -> Session {
@@ -58,6 +60,8 @@ impl Session {
             assets: Signal::new(Vec::new()),
             preview: Signal::new(Preview::Idle),
             exporting: Signal::new(false),
+            unlocking: Signal::new(None),
+            creating: Signal::new(false),
         }
     }
 

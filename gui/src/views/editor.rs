@@ -9,6 +9,7 @@ use std::path::PathBuf;
 mod action_bar;
 mod assets_section;
 mod create_profile_dialog;
+mod dialogs;
 mod form;
 mod preview_pane;
 mod profile_picker;
@@ -16,6 +17,7 @@ mod session;
 mod settings_pane;
 mod unlock_dialog;
 
+use dialogs::Dialogs;
 use preview_pane::PreviewPane;
 use session::{Session, use_autosave};
 use settings_pane::SettingsPane;
@@ -48,6 +50,7 @@ fn Workspace(dir: PathBuf) -> Element {
         div { class: "flex h-full",
             PreviewPane {}
             SettingsPane {}
+            Dialogs {}
         }
     }
 }
@@ -60,7 +63,9 @@ fn MissingTemplate() -> Element {
         div { class: "flex h-full items-center justify-center p-8",
             Card { class: "flex max-w-md flex-col gap-4 p-8",
                 h2 { class: "text-lg font-semibold", "Template not found" }
-                p { class: "text-sm text-soft", "This template is no longer in your templates folder." }
+                p { class: "text-sm text-soft",
+                    "This template is no longer in your templates folder."
+                }
                 Button {
                     onclick: move |_| {
                         navigator.push(Route::Home {});

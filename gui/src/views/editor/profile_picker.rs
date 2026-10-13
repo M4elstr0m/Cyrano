@@ -1,6 +1,4 @@
-use super::{
-    create_profile_dialog::CreateProfileDialog, session::use_session, unlock_dialog::UnlockDialog,
-};
+use super::session::use_session;
 use crate::{
     components::{Badge, Button, Dropdown, DropdownItem, Size, Tone, Variant},
     state::{ProfileEntry, use_app_state},
@@ -11,8 +9,8 @@ use dioxus::prelude::*;
 pub fn ProfilePicker() -> Element {
     let state = use_app_state();
     let session = use_session();
-    let mut unlocking = use_signal(|| None::<ProfileEntry>);
-    let mut creating = use_signal(|| false);
+    let mut unlocking = session.unlocking;
+    let mut creating = session.creating;
 
     let entries = state.profile_entries();
     let active = session.active_dir();
@@ -32,63 +30,42 @@ pub fn ProfilePicker() -> Element {
 
     rsx! {
         div { class: "flex flex-col gap-2",
-            span { class: "text-xs font-medium text-soft", "Profile" }
-            div { class: "flex items-center gap-2",
-                div { class: "min-w-0 flex-1",
-                    Dropdown {
-                        trigger: rsx! {
-                            div { class: "flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-inset px-4 py-3 hover:border-accent",
-                                span { class: "truncate text-sm font-medium", "{label}" }
-                                span { class: "text-xs text-soft", "Change" }
-                            }
-                        },
-                        for entry in entries {
-                            DropdownItem {
-                                key: "{entry.dir.display()}",
-                                onclick: {
-                                    let entry = entry.clone();
-                                    move |_| pick.call(entry.clone())
-                                },
-                                span { class: "truncate", "{entry.name}" }
-                                if entry.unlocked {
-                                    Badge { tone: Tone::Success, "Unlocked" }
-                                } else {
-                                    Badge { "Locked" }
-                                }
-                            }
-                        }
-                        DropdownItem { onclick: move |_| creating.set(true),
-                            span { class: "font-medium text-accent", "Create a profile" }
-                        }
-                    }
-                }
+            div { class: "flex items-center justify-between",
+                span { class: "text-xs font-medium text-soft", "Profile" }
                 if active.is_some() {
                     Button {
-                        variant: Variant::Secondary,
+                        variant: Variant::Ghost,
                         size: Size::Sm,
                         onclick: move |_| session.lock(),
                         "Lock"
                     }
                 }
             }
-        }
-        if let Some(entry) = unlocking() {
-            UnlockDialog {
-                entry,
-                onunlocked: move |dir| {
-                    unlocking.set(None);
-                    session.select(dir);
+            Dropdown {
+                trigger: rsx! {
+                    div { class: "flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-inset px-4 py-3 hover:border-accent",
+                        span { class: "truncate text-sm font-medium", "{label}" }
+                        span { class: "text-xs text-soft", "Change" }
+                    }
                 },
-                onclose: move |_| unlocking.set(None),
-            }
-        }
-        if creating() {
-            CreateProfileDialog {
-                oncreated: move |dir| {
-                    creating.set(false);
-                    session.select(dir);
-                },
-                onclose: move |_| creating.set(false),
+                for entry in entries {
+                    DropdownItem {
+                        key: "{entry.dir.display()}",
+                        onclick: {
+                            let entry = entry.clone();
+                            move |_| pick.call(entry.clone())
+                        },
+                        span { class: "truncate", "{entry.name}" }
+                        if entry.unlocked {
+                            Badge { tone: Tone::Success, "Unlocked" }
+                        } else {
+                            Badge { "Locked" }
+                        }
+                    }
+                }
+                DropdownItem { onclick: move |_| creating.set(true),
+                    span { class: "font-medium text-accent", "Create a profile" }
+                }
             }
         }
     }
