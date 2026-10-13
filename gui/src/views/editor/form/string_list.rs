@@ -1,4 +1,4 @@
-use super::row::AddButton;
+use super::{row::AddButton, support::move_item};
 use crate::components::{Button, Size, TextInput, Variant};
 use dioxus::prelude::*;
 
@@ -26,6 +26,34 @@ pub fn StringListEditor(
                                 }
                             },
                         }
+                    }
+                    Button {
+                        variant: Variant::Ghost,
+                        size: Size::Sm,
+                        disabled: index == 0,
+                        onclick: {
+                            let items = items.clone();
+                            move |_| {
+                                let mut items = items.clone();
+                                move_item(&mut items, index, -1);
+                                onchange.call(items);
+                            }
+                        },
+                        "Up"
+                    }
+                    Button {
+                        variant: Variant::Ghost,
+                        size: Size::Sm,
+                        disabled: index + 1 >= items.len(),
+                        onclick: {
+                            let items = items.clone();
+                            move |_| {
+                                let mut items = items.clone();
+                                move_item(&mut items, index, 1);
+                                onchange.call(items);
+                            }
+                        },
+                        "Down"
                     }
                     Button {
                         variant: Variant::Ghost,
