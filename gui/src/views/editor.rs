@@ -7,6 +7,7 @@ use dioxus::prelude::*;
 use std::path::PathBuf;
 
 mod action_bar;
+mod create_profile_dialog;
 mod preview_pane;
 mod session;
 mod unlock_dialog;
