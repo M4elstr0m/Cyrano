@@ -20,7 +20,7 @@ pub fn SettingsDialog() -> Element {
     rsx! {
         Modal { title: "Settings", onclose: move |_| open.set(false),
             div { class: "flex flex-col gap-4",
-                for (label , path) in locations {
+                for (label, path) in locations {
                     if let Ok(path) = path {
                         LocationRow { key: "{label}", label, path }
                     }
