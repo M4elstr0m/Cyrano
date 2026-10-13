@@ -69,6 +69,25 @@ impl AppState {
         }
     }
 
+    pub fn reload_templates(mut self) {
+        let loaded = self
+            .preferences
+            .read()
+            .templates_dir()
+            .map_err(Error::from)
+            .and_then(|dir| template::Store::load(&dir).map_err(Error::from));
+
+        match loaded {
+            Ok((store, warnings)) => {
+                self.templates.set(store);
+                self.notices
+                    .write()
+                    .extend(warnings.into_iter().map(describe));
+            }
+            Err(error) => self.fail(error),
+        }
+    }
+
     pub fn template_dir(&self, name: &str) -> Option<PathBuf> {
         Some(self.preferences.read().templates_dir().ok()?.join(name))
     }
