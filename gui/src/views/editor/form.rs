@@ -1,8 +1,10 @@
 use dioxus::prelude::*;
+use experience::ExperienceSection;
 use identity::IdentitySection;
 use links::LinksSection;
 
 mod date_range;
+mod experience;
 mod identity;
 mod links;
 mod row;
@@ -14,5 +16,6 @@ pub fn CvForm() -> Element {
     rsx! {
         IdentitySection {}
         LinksSection {}
+        ExperienceSection {}
     }
 }

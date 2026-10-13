@@ -22,9 +22,11 @@ fn main() {
         .with_title("Cyrano")
         .with_inner_size(LogicalSize::new(1360.0, 860.0));
 
-    dioxus::LaunchBuilder::new()
-        .with_cfg(Config::new().with_window_attributes(window))
-        .launch(App);
+    dioxus::native::launch_cfg(
+        App,
+        Vec::new(),
+        vec![Box::new(Config::new().with_window_attributes(window))],
+    );
 }
 
 #[component]

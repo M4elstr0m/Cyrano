@@ -1,3 +1,4 @@
+use cyrano_core::cv_data::{DateRange, YearMonth};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 const SECONDS_PER_YEAR: u64 = 31_556_952;
@@ -19,4 +20,14 @@ pub fn current_year() -> u16 {
         .unwrap_or_default();
 
     (1970 + seconds / SECONDS_PER_YEAR) as u16
+}
+
+pub fn new_range() -> DateRange {
+    DateRange {
+        start: YearMonth {
+            year: current_year(),
+            month: None,
+        },
+        end: None,
+    }
 }

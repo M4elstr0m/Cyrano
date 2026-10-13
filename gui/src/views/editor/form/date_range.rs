@@ -74,3 +74,15 @@ pub fn DateRangeFields(
         }
     }
 }
+
+pub fn date_fields(date: &DateRange, onchange: impl FnMut(DateRange) + 'static) -> Element {
+    rsx! {
+        DateRangeFields {
+            start_year: date.start.year,
+            start_month: date.start.month,
+            end_year: date.end.map(|end| end.year),
+            end_month: date.end.and_then(|end| end.month),
+            onchange: EventHandler::new(onchange),
+        }
+    }
+}
