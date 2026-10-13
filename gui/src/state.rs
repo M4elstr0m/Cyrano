@@ -4,7 +4,7 @@ use crate::{
 };
 use cyrano_core::{
     profile::{self, Identity},
-    template,
+    template::{self, RenderedTemplate},
 };
 use dioxus::prelude::*;
 use std::path::{Path, PathBuf};
@@ -25,6 +25,7 @@ pub struct AppState {
     pub templates: Signal<template::Store>,
     pub profiles: Signal<profile::Store>,
     pub notices: Signal<Vec<Notice>>,
+    pub settings_open: Signal<bool>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -64,6 +65,7 @@ impl AppState {
             templates: Signal::new(templates),
             profiles: Signal::new(profiles),
             notices: Signal::new(notices),
+            settings_open: Signal::new(false),
         })
     }
 
@@ -121,6 +123,23 @@ impl AppState {
         let mut entries: Vec<ProfileEntry> = unlocked.chain(locked).collect();
         entries.sort_by_key(|entry| entry.name.to_lowercase());
         entries
+    }
+
+    pub fn delete_template(mut self, dir: &Path) {
+        let result = self.templates.write().delete_template(dir);
+
+        if let Err(error) = result {
+            self.fail(error);
+        }
+    }
+
+    pub fn clear_temp_files(self) {
+        let _ = std::fs::remove_dir_all(std::env::temp_dir().join("cyrano_preview"));
+
+        match RenderedTemplate::clear_temp_files() {
+            Ok(()) => self.notify(Tone::Success, "Temporary files cleared."),
+            Err(error) => self.fail(error),
+        }
     }
 
     pub fn template_dir(&self, name: &str) -> Option<PathBuf> {

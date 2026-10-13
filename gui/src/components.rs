@@ -1,6 +1,7 @@
 mod badge;
 mod button;
 mod card;
+mod confirm_dialog;
 mod dropdown;
 mod header;
 mod modal;
@@ -14,6 +15,7 @@ mod tone;
 pub use badge::Badge;
 pub use button::{Button, Size, Variant};
 pub use card::Card;
+pub use confirm_dialog::ConfirmDialog;
 pub use dropdown::{Dropdown, DropdownItem};
 pub use header::Header;
 pub use modal::Modal;
