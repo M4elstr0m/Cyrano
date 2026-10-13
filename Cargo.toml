@@ -1,3 +1,6 @@
 [workspace]
 members = ["core", "gui"]
 resolver = "2"
+
+[patch.crates-io]
+blitz-dom = { path = "gui/vendor/blitz-dom" }
