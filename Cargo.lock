@@ -1846,14 +1846,12 @@ dependencies = [
  "base64 0.23.1",
  "blake3",
  "chacha20poly1305",
- "directories",
  "getrandom 0.4.3",
  "infer 0.22.0",
  "mestra-core",
  "rand_core 0.10.1",
  "serde",
  "serde_json",
- "serde_with",
  "tera",
  "thiserror 2.0.21",
  "tokio",
@@ -1867,6 +1865,11 @@ version = "0.1.0"
 dependencies = [
  "cyrano-core",
  "dioxus",
+ "directories",
+ "serde",
+ "serde_with",
+ "thiserror 2.0.21",
+ "toml 1.1.6+spec-1.1.0",
 ]
 
 [[package]]
@@ -7209,9 +7212,9 @@ dependencies = [
 
 [[package]]
 name = "schemars"
-version = "1.2.2"
+version = "1.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "687274d293b6cdc6e73e0fee520bf2049650090d7164f87672d212a3c530cf4a"
+checksum = "ab508826f74a77ca9d5aba6ff19b522583ee3eaf28a19384ff3d0e5835fadf6e"
 dependencies = [
  "dyn-clone",
  "ref-cast",
@@ -7452,7 +7455,7 @@ dependencies = [
  "indexmap 2.14.2",
  "jiff",
  "schemars 0.9.0",
- "schemars 1.2.2",
+ "schemars 1.2.3",
  "serde_core",
  "serde_json",
  "serde_with_macros",

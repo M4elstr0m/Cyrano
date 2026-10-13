@@ -7,14 +7,12 @@ mod error;
 pub use error::Error;
 
 const FILENAME: &str = "preferences.toml";
+const APP_QUALIFIER: &str = "com";
+const APP_ORGANIZATION: &str = "M4elstr0m";
+const APP_NAME: &str = "Cyrano";
 
 fn app_directory() -> Result<ProjectDirs, Error> {
-    ProjectDirs::from(
-        crate::APP_QUALIFIER,
-        crate::APP_ORGANIZATION,
-        crate::APP_NAME,
-    )
-    .ok_or(Error::NoHomeDirectory)
+    ProjectDirs::from(APP_QUALIFIER, APP_ORGANIZATION, APP_NAME).ok_or(Error::NoHomeDirectory)
 }
 
 #[skip_serializing_none]

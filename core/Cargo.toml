@@ -8,14 +8,12 @@ argon2 = "0.6.0"
 base64 = "0.23.1"
 blake3 = "1.8.7"
 chacha20poly1305 = { version = "0.11.0", features = ["zeroize"] }
-directories = "6.0.0"
 getrandom = { version = "0.4.3", features = ["std"] }
 infer = "0.22.0"
 mestra-core = { git = "https://github.com/M4elstr0m/Mestra", rev = "core-v0.1.0", version = "0.1.0" }
 rand_core = "0.10.1"
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.151"
-serde_with = "3.24.0"
 tera = { version = "2.4.0", features = ["glob_fs"] }
 thiserror = "2.0.21"
 tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros", "sync"] }
