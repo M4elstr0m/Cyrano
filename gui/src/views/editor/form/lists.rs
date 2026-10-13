@@ -10,6 +10,7 @@ pub fn SoftSkillsSection() -> Element {
     rsx! {
         Section { title: "Soft skills", count: items.len(),
             StringListEditor {
+                list: "soft-skills",
                 label: "Skill",
                 add_label: "Add skill",
                 items,
@@ -27,6 +28,7 @@ pub fn HobbiesSection() -> Element {
     rsx! {
         Section { title: "Hobbies", count: items.len(),
             StringListEditor {
+                list: "hobbies",
                 label: "Hobby",
                 add_label: "Add hobby",
                 items,

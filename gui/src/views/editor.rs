@@ -35,8 +35,12 @@ fn Workspace(dir: PathBuf) -> Element {
     use_autosave(session);
     use_hook(move || state.on_quit(Callback::new(move |_| session.persist())));
 
+    let mut drag = session.drag;
+
     rsx! {
-        div { class: "flex h-full w-full",
+        div {
+            class: "flex h-full w-full",
+            onmouseup: move |_| drag.set(None),
             PreviewPane {}
             SettingsPane {}
             Dialogs {}

@@ -2,7 +2,7 @@ use super::{
     super::session::use_session,
     date_range::date_fields,
     row::{AddButton, RowCard},
-    support::{move_item, new_range, with_item},
+    support::{move_to, new_range, with_item},
 };
 use crate::components::{Section, TextInput};
 use cyrano_core::cv_data::Experience;
@@ -44,9 +44,9 @@ fn ExperienceRow(index: usize) -> Element {
 
     rsx! {
         RowCard {
+            list: "experience",
             index,
-            count: draft.read().experience.len(),
-            onmove: move |delta| move_item(&mut draft.write().experience, index, delta),
+            onreorder: move |(from, to)| move_to(&mut draft.write().experience, from, to),
             onremove: move |_| {
                 draft.write().experience.remove(index);
             },

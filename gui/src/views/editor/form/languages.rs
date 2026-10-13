@@ -1,7 +1,7 @@
 use super::{
     super::session::use_session,
     row::{AddButton, RowCard},
-    support::{move_item, with_item},
+    support::{move_to, with_item},
 };
 use crate::components::{Section, TextInput};
 use cyrano_core::cv_data::LanguageSkill;
@@ -42,9 +42,9 @@ fn LanguageRow(index: usize) -> Element {
 
     rsx! {
         RowCard {
+            list: "languages",
             index,
-            count: draft.read().languages.len(),
-            onmove: move |delta| move_item(&mut draft.write().languages, index, delta),
+            onreorder: move |(from, to)| move_to(&mut draft.write().languages, from, to),
             onremove: move |_| {
                 draft.write().languages.remove(index);
             },

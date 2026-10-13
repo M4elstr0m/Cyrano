@@ -18,6 +18,12 @@ pub enum Preview {
 }
 
 #[derive(Clone, PartialEq)]
+pub struct Drag {
+    pub list: String,
+    pub index: usize,
+}
+
+#[derive(Clone, PartialEq)]
 pub struct AssetEntry {
     pub name: String,
     pub uri: Option<String>,
@@ -35,6 +41,7 @@ pub struct Session {
     pub unlocking: Signal<Option<ProfileEntry>>,
     pub creating: Signal<bool>,
     pub deleting: Signal<bool>,
+    pub drag: Signal<Option<Drag>>,
 }
 
 pub fn use_session() -> Session {
@@ -64,6 +71,7 @@ impl Session {
             unlocking: Signal::new(None),
             creating: Signal::new(false),
             deleting: Signal::new(false),
+            drag: Signal::new(None),
         }
     }
 

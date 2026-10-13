@@ -2,7 +2,7 @@ use super::{
     super::session::use_session,
     row::{AddButton, RowCard},
     string_list::StringListEditor,
-    support::{move_item, with_item},
+    support::{move_to, with_item},
 };
 use crate::components::{Section, TextInput};
 use cyrano_core::cv_data::SkillGroup;
@@ -43,9 +43,9 @@ fn SkillGroupRow(index: usize) -> Element {
 
     rsx! {
         RowCard {
+            list: "hard_skills",
             index,
-            count: draft.read().hard_skills.len(),
-            onmove: move |delta| move_item(&mut draft.write().hard_skills, index, delta),
+            onreorder: move |(from, to)| move_to(&mut draft.write().hard_skills, from, to),
             onremove: move |_| {
                 draft.write().hard_skills.remove(index);
             },
@@ -57,6 +57,7 @@ fn SkillGroupRow(index: usize) -> Element {
                 },
             }
             StringListEditor {
+                list: format!("hard-skill-items-{index}"),
                 label: "Skill",
                 add_label: "Add skill",
                 items: group.items,

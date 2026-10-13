@@ -10,11 +10,10 @@ pub fn with_item<T>(items: &mut [T], index: usize, change: impl FnOnce(&mut T)) 
     }
 }
 
-pub fn move_item<T>(items: &mut [T], index: usize, delta: i32) {
-    let target = index as i32 + delta;
-
-    if target >= 0 && (target as usize) < items.len() {
-        items.swap(index, target as usize);
+pub fn move_to<T>(items: &mut Vec<T>, from: usize, to: usize) {
+    if from < items.len() && to < items.len() {
+        let item = items.remove(from);
+        items.insert(to, item);
     }
 }
 
