@@ -88,7 +88,7 @@ fn TemplateCard(
                     }
                 }
             }
-            span { class: "inline-flex w-fit rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary",
+            span { class: "mt-auto self-start rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary",
                 "Use template"
             }
         }
