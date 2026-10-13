@@ -1,5 +1,7 @@
 use dioxus::prelude::*;
 
+mod session;
+
 #[component]
 pub fn Editor(template: String) -> Element {
     rsx! {
