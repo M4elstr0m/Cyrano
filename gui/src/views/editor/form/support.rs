@@ -1,7 +1,4 @@
 use cyrano_core::cv_data::{DateRange, YearMonth};
-use std::time::{SystemTime, UNIX_EPOCH};
-
-const SECONDS_PER_YEAR: u64 = 31_556_952;
 
 pub fn optional(value: String) -> Option<String> {
     if value.is_empty() { None } else { Some(value) }
@@ -13,19 +10,18 @@ pub fn with_item<T>(items: &mut [T], index: usize, change: impl FnOnce(&mut T)) 
     }
 }
 
-pub fn current_year() -> u16 {
-    let seconds = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .map(|elapsed| elapsed.as_secs())
-        .unwrap_or_default();
+pub fn move_item<T>(items: &mut [T], index: usize, delta: i32) {
+    let target = index as i32 + delta;
 
-    (1970 + seconds / SECONDS_PER_YEAR) as u16
+    if target >= 0 && (target as usize) < items.len() {
+        items.swap(index, target as usize);
+    }
 }
 
 pub fn new_range() -> DateRange {
     DateRange {
         start: YearMonth {
-            year: current_year(),
+            year: 0,
             month: None,
         },
         end: None,

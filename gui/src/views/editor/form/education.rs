@@ -2,7 +2,7 @@ use super::{
     super::session::use_session,
     date_range::date_fields,
     row::{AddButton, RowCard},
-    support::{new_range, with_item},
+    support::{move_item, new_range, with_item},
 };
 use crate::components::{Section, TextArea, TextInput};
 use cyrano_core::cv_data::Education;
@@ -44,6 +44,9 @@ fn EducationRow(index: usize) -> Element {
 
     rsx! {
         RowCard {
+            index,
+            count: draft.read().education.len(),
+            onmove: move |delta| move_item(&mut draft.write().education, index, delta),
             onremove: move |_| {
                 draft.write().education.remove(index);
             },

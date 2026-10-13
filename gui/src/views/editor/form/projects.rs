@@ -3,7 +3,7 @@ use super::{
     date_range::date_fields,
     row::{AddButton, RowCard},
     string_list::StringListEditor,
-    support::{new_range, with_item},
+    support::{move_item, new_range, with_item},
 };
 use crate::components::{Section, TextArea, TextInput};
 use cyrano_core::cv_data::Project;
@@ -46,6 +46,9 @@ fn ProjectRow(index: usize) -> Element {
 
     rsx! {
         RowCard {
+            index,
+            count: draft.read().projects.len(),
+            onmove: move |delta| move_item(&mut draft.write().projects, index, delta),
             onremove: move |_| {
                 draft.write().projects.remove(index);
             },
