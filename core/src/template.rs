@@ -25,7 +25,7 @@ pub struct Template {
     pub entry_path: PathBuf,
 
     #[serde(default)]
-    pub required_assets: Vec<Asset>,
+    pub required_assets: Vec<String>,
 }
 
 impl Template {
@@ -74,13 +74,8 @@ impl Template {
         let mut context = tera::Context::from_serialize(cv_data)?;
 
         for required_asset in &self.required_assets {
-            if assets
-                .iter()
-                .filter(|a| a.name() == required_asset.name())
-                .count()
-                == 0
-            {
-                return Err(Error::MissingAsset(required_asset.name().to_owned()));
+            if assets.iter().filter(|a| a.name() == required_asset).count() == 0 {
+                return Err(Error::MissingAsset(required_asset.to_owned()));
             }
         }
 
