@@ -14,6 +14,7 @@ pub struct CvData {
     pub age_display: Option<String>,
     pub location: Option<String>,
     pub email: Option<String>,
+    pub phonenumber: Option<String>,
     pub links: Vec<Link>,
 
     pub projects: Vec<Project>,
@@ -37,6 +38,7 @@ impl CvData {
             age_display: None,
             location: None,
             email: None,
+            phonenumber: None,
             links: Vec::new(),
             projects: Vec::new(),
             experience: Vec::new(),

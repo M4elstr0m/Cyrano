@@ -7,7 +7,7 @@ default:
 # Launch the GUI package
 [working-directory: 'gui']
 run: (clippy "cyrano-gui")
-    dx serve
+    dx serve --release -p cyrano-gui
 
 # Cleans the build artifacts
 clean:

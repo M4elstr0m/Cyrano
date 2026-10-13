@@ -45,6 +45,12 @@ pub fn IdentitySection() -> Element {
                 value: cv.email.clone().unwrap_or_default(),
                 oninput: move |value| draft.write().email = optional(value),
             }
+            TextInput {
+                label: "Phone number",
+                placeholder: "e.g. +33 6 12 34 56 78",
+                value: cv.phonenumber.clone().unwrap_or_default(),
+                oninput: move |value| draft.write().phonenumber = optional(value),
+            }
         }
     }
 }
