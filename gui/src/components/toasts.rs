@@ -10,7 +10,11 @@ pub fn Toasts() -> Element {
     rsx! {
         div { class: "fixed bottom-5 right-5 z-[60] flex w-96 flex-col gap-3",
             for (index, notice) in notices.iter().enumerate() {
-                Toast { key: "{index}-{notice.message}", notice: notice.clone(), index }
+                Toast {
+                    key: "{index}-{notice.message}",
+                    notice: notice.clone(),
+                    index,
+                }
             }
         }
     }

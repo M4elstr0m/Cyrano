@@ -37,13 +37,17 @@ pub fn Home() -> Element {
                     EmptyTemplates {}
                 } else {
                     div { class: "flex flex-wrap gap-6",
-                        for (dir , template) in entries {
+                        for (dir, template) in entries {
                             TemplateCard {
                                 key: "{dir.display()}",
                                 folder: dir.file_name().map(|name| name.to_string_lossy().into_owned()).unwrap_or_default(),
                                 name: template.name.clone(),
                                 description: template.description.clone(),
-                                assets: template.required_assets.iter().map(|asset| asset.name().to_owned()).collect::<Vec<_>>(),
+                                assets: template
+                                    .required_assets
+                                    .iter()
+                                    .map(|asset| asset.name().to_owned())
+                                    .collect::<Vec<_>>(),
                             }
                         }
                     }

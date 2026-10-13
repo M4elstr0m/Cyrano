@@ -24,7 +24,7 @@ pub fn PreviewPane() -> Element {
                 },
                 Preview::Ready(pages) => rsx! {
                     div { class: "mx-auto flex max-w-[860px] flex-col items-center gap-8 p-10",
-                        for (index , page) in pages.iter().enumerate() {
+                        for (index, page) in pages.iter().enumerate() {
                             img {
                                 key: "{index}",
                                 class: "w-full rounded-lg bg-white shadow-page",

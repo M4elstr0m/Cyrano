@@ -69,12 +69,7 @@ fn AssetRow(asset: AssetEntry) -> Element {
                     Badge { tone: Tone::Danger, "Missing" }
                 }
             }
-            Button {
-                variant: Variant::Secondary,
-                size: Size::Sm,
-                onclick: pick,
-                "{action}"
-            }
+            Button { variant: Variant::Secondary, size: Size::Sm, onclick: pick, "{action}" }
         }
     }
 }

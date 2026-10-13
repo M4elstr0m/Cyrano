@@ -11,7 +11,7 @@ pub fn StringListEditor(
 ) -> Element {
     rsx! {
         div { class: "flex flex-col gap-3",
-            for (index , item) in items.iter().enumerate() {
+            for (index, item) in items.iter().enumerate() {
                 div { key: "{index}", class: "flex items-end gap-2",
                     div { class: "min-w-0 flex-1",
                         TextInput {
