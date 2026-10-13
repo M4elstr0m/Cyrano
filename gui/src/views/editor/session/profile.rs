@@ -34,6 +34,21 @@ impl Session {
             return;
         }
 
+        self.clear();
+    }
+
+    pub fn delete_active(mut self) {
+        let Some(dir) = self.active_dir() else { return };
+        let mut profiles = self.state.profiles;
+        let result = profiles.write().delete_profile(&dir);
+
+        match result {
+            Ok(()) => self.clear(),
+            Err(error) => self.state.fail(error),
+        }
+    }
+
+    fn clear(mut self) {
         self.active.set(None);
         self.draft.set(CvData::new(String::new()));
         self.assets.set(Vec::new());

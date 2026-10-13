@@ -34,6 +34,7 @@ pub struct Session {
     pub exporting: Signal<bool>,
     pub unlocking: Signal<Option<ProfileEntry>>,
     pub creating: Signal<bool>,
+    pub deleting: Signal<bool>,
 }
 
 pub fn use_session() -> Session {
@@ -62,6 +63,7 @@ impl Session {
             exporting: Signal::new(false),
             unlocking: Signal::new(None),
             creating: Signal::new(false),
+            deleting: Signal::new(false),
         }
     }
 

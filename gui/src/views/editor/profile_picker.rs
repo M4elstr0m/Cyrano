@@ -11,6 +11,7 @@ pub fn ProfilePicker() -> Element {
     let session = use_session();
     let mut unlocking = session.unlocking;
     let mut creating = session.creating;
+    let mut deleting = session.deleting;
 
     let entries = state.profile_entries();
     let active = session.active_dir();
@@ -33,11 +34,19 @@ pub fn ProfilePicker() -> Element {
             div { class: "flex items-center justify-between",
                 span { class: "text-xs font-medium text-soft", "Profile" }
                 if active.is_some() {
-                    Button {
-                        variant: Variant::Ghost,
-                        size: Size::Sm,
-                        onclick: move |_| session.lock(),
-                        "Lock"
+                    div { class: "flex items-center gap-1",
+                        Button {
+                            variant: Variant::Ghost,
+                            size: Size::Sm,
+                            onclick: move |_| session.lock(),
+                            "Lock"
+                        }
+                        Button {
+                            variant: Variant::Ghost,
+                            size: Size::Sm,
+                            onclick: move |_| deleting.set(true),
+                            "Delete"
+                        }
                     }
                 }
             }

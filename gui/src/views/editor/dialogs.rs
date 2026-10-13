@@ -1,6 +1,7 @@
 use super::{
     create_profile_dialog::CreateProfileDialog, session::use_session, unlock_dialog::UnlockDialog,
 };
+use crate::components::ConfirmDialog;
 use dioxus::prelude::*;
 
 #[component]
@@ -8,6 +9,7 @@ pub fn Dialogs() -> Element {
     let session = use_session();
     let mut unlocking = session.unlocking;
     let mut creating = session.creating;
+    let mut deleting = session.deleting;
 
     rsx! {
         if let Some(entry) = unlocking() {
@@ -27,6 +29,18 @@ pub fn Dialogs() -> Element {
                     session.select(dir);
                 },
                 onclose: move |_| creating.set(false),
+            }
+        }
+        if deleting() {
+            ConfirmDialog {
+                title: "Delete this profile?",
+                message: "The profile and its encrypted data will be permanently deleted. This cannot be undone.",
+                confirm_label: "Delete profile",
+                onconfirm: move |_| {
+                    deleting.set(false);
+                    session.delete_active();
+                },
+                onclose: move |_| deleting.set(false),
             }
         }
     }
