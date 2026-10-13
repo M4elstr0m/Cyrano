@@ -169,6 +169,21 @@
   box-shadow: 0 16px 40px rgba(var(--shade), 0.22);
 }
 
+@utility control {
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.25s ease,
+    color 0.25s ease;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
 @utility turn {
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

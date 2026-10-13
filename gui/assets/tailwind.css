@@ -22,11 +22,8 @@
     --text-lg--line-height: calc(1.75 / 1.125);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
-    --font-weight-light: 300;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -450,6 +447,15 @@
       color: var(--accent);
     }
   }
+  .control {
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease, color 0.25s ease;
+    &:hover {
+      transform: scale(1.08);
+    }
+    &:active {
+      transform: scale(0.94);
+    }
+  }
   .press {
     transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.22s ease, opacity 0.22s ease;
     &:hover {
@@ -641,9 +647,6 @@
   .border-line {
     border-color: var(--line);
   }
-  .border-transparent {
-    border-color: transparent;
-  }
   .bg-\[\#d9deea\] {
     background-color: #d9deea;
   }
@@ -788,10 +791,6 @@
   .font-sans {
     font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
   }
-  .text-2xl {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
-  }
   .text-4xl {
     font-size: var(--text-4xl);
     line-height: var(--tw-leading, var(--text-4xl--line-height));
@@ -826,10 +825,6 @@
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
-  }
-  .font-light {
-    --tw-font-weight: var(--font-weight-light);
-    font-weight: var(--font-weight-light);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
@@ -932,10 +927,17 @@
       }
     }
   }
-  .hover\:border-danger {
+  .hover\:bg-accent-soft {
     &:hover {
       @media (hover: hover) {
-        border-color: var(--danger);
+        background-color: var(--accent-soft);
+      }
+    }
+  }
+  .hover\:bg-danger {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--danger);
       }
     }
   }
@@ -957,6 +959,13 @@
     &:hover {
       @media (hover: hover) {
         color: var(--ink);
+      }
+    }
+  }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white);
       }
     }
   }

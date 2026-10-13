@@ -75,7 +75,18 @@ pub fn WindowControls() -> Element {
                 }
             }
             ControlButton { danger: true, onclick: move |_| state.quit(),
-                span { class: "text-2xl font-light leading-none", "×" }
+                svg {
+                    width: "14",
+                    height: "14",
+                    view_box: "0 0 14 14",
+                    fill: "none",
+                    path {
+                        d: "M1 1 L13 13 M13 1 L1 13",
+                        stroke: "currentColor",
+                        stroke_width: "2.4",
+                        stroke_linecap: "round",
+                    }
+                }
             }
         }
     }
@@ -88,14 +99,14 @@ fn ControlButton(
     children: Element,
 ) -> Element {
     let hover = if danger {
-        "hover:border-danger hover:text-danger"
+        "hover:bg-danger hover:text-white"
     } else {
-        "hover:border-accent hover:text-accent"
+        "hover:bg-accent-soft hover:text-accent"
     };
 
     rsx! {
         button {
-            class: "press flex size-9 items-center justify-center rounded-full border border-transparent text-soft {hover}",
+            class: "control flex size-9 items-center justify-center rounded-full text-soft {hover}",
             r#type: "button",
             onclick: move |event| onclick.call(event),
             {children}
