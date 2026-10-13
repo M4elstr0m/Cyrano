@@ -55,8 +55,45 @@ pub async fn preview(state: AppState, request: Request) -> Result<Vec<String>, E
 pub async fn export(state: AppState, request: Request) -> Result<PathBuf, Error> {
     let rendered = render_template(state, &request)?;
     let directory = state.preferences.read().output_dir()?;
+    let template_name = state
+        .templates
+        .read()
+        .template(&request.template_dir)
+        .map(|template| template.name.clone())
+        .unwrap_or_default();
 
-    Ok(rendered.to_pdf(&directory).await?)
+    let generated = rendered.to_pdf(&directory).await?;
+    let target = directory.join(file_name(&request.cv.name, &template_name));
+    std::fs::rename(&generated, &target)?;
+
+    Ok(target)
+}
+
+fn file_name(person: &str, template: &str) -> String {
+    let clean = |text: &str| {
+        text.split_whitespace()
+            .collect::<Vec<_>>()
+            .join("_")
+            .chars()
+            .map(|c| {
+                if c.is_alphanumeric() || c == '-' {
+                    c
+                } else {
+                    '_'
+                }
+            })
+            .collect::<String>()
+    };
+
+    let person = clean(person);
+    let template = clean(template);
+
+    match (person.is_empty(), template.is_empty()) {
+        (true, true) => "CV.pdf".to_owned(),
+        (false, true) => format!("{person}.pdf"),
+        (true, false) => format!("CV-{template}.pdf"),
+        (false, false) => format!("{person}-{template}.pdf"),
+    }
 }
 
 fn rasterize(pdf: Vec<u8>) -> Result<Vec<String>, Error> {
