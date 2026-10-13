@@ -1911,6 +1911,7 @@ dependencies = [
  "directories",
  "hayro",
  "opener",
+ "rfd",
  "serde",
  "serde_with",
  "thiserror 2.0.21",
@@ -7396,6 +7397,9 @@ dependencies = [
  "raw-window-handle 0.6.2",
  "wasm-bindgen",
  "wasm-bindgen-futures",
+ "wayland-backend",
+ "wayland-client",
+ "wayland-protocols",
  "web-sys",
  "windows-sys 0.61.2",
 ]

@@ -2,7 +2,10 @@ use crate::{
     components::Tone,
     preferences::{Preferences, Theme},
 };
-use cyrano_core::{profile, template};
+use cyrano_core::{
+    profile::{self, Identity},
+    template,
+};
 use dioxus::prelude::*;
 use std::path::{Path, PathBuf};
 
@@ -22,6 +25,13 @@ pub struct AppState {
     pub templates: Signal<template::Store>,
     pub profiles: Signal<profile::Store>,
     pub notices: Signal<Vec<Notice>>,
+}
+
+#[derive(Clone, PartialEq)]
+pub struct ProfileEntry {
+    pub dir: PathBuf,
+    pub name: String,
+    pub unlocked: bool,
 }
 
 pub fn use_app_state() -> AppState {
@@ -86,6 +96,31 @@ impl AppState {
             }
             Err(error) => self.fail(error),
         }
+    }
+
+    pub fn profile_entries(&self) -> Vec<ProfileEntry> {
+        let profiles = self.profiles.read();
+
+        let unlocked = profiles
+            .all_unlocked()
+            .into_iter()
+            .map(|(dir, profile)| ProfileEntry {
+                dir: dir.to_path_buf(),
+                name: profile.identity().name.clone(),
+                unlocked: true,
+            });
+
+        let locked = profiles.all_locked().into_iter().filter_map(|(dir, _)| {
+            Some(ProfileEntry {
+                dir: dir.to_path_buf(),
+                name: Identity::load(dir).ok()?.name,
+                unlocked: false,
+            })
+        });
+
+        let mut entries: Vec<ProfileEntry> = unlocked.chain(locked).collect();
+        entries.sort_by_key(|entry| entry.name.to_lowercase());
+        entries
     }
 
     pub fn template_dir(&self, name: &str) -> Option<PathBuf> {
