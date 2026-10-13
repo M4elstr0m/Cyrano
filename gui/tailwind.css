@@ -1,40 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #eef1f6;
-  --surface: #ffffff;
-  --inset: #f3f5f9;
-  --line: #e2e6ee;
-  --ink: #0f1420;
-  --soft: #5b6475;
-  --primary: #0f1420;
-  --on-primary: #ffffff;
-  --accent: #2f6bff;
-  --accent-soft: #e6eeff;
-  --danger: #d92d3a;
-  --success: #17915a;
-  --brand-2: #8b5cf6;
-  --glow-2: #efe9ff;
+  --canvas: #f4eed7;
+  --surface: #fbf8ea;
+  --inset: #efe7c9;
+  --line: #ddd2a9;
+  --ink: #132135;
+  --soft: #596479;
+  --primary: #132135;
+  --on-primary: #f4eed7;
+  --accent: #b8832a;
+  --on-accent: #132135;
+  --accent-soft: #f1e3b3;
+  --danger: #b3261e;
+  --success: #2f7d4f;
+  --brand-2: #c9602f;
+  --glow-1: #efe2b0;
+  --glow-2: #e4d4a0;
+  --shade: 19, 33, 53;
 }
 
 .dark {
-  --canvas: #090b10;
-  --surface: #131620;
-  --inset: #1a1e29;
-  --line: #262b38;
-  --ink: #eef1f7;
-  --soft: #98a1b3;
-  --primary: #f2f4f8;
-  --on-primary: #0f1420;
-  --accent: #6c9bff;
-  --accent-soft: #1b2744;
-  --danger: #ff6b76;
-  --success: #4ade80;
-  --brand-2: #a78bfa;
-  --glow-2: #1d1838;
+  --canvas: #0a1322;
+  --surface: #111d33;
+  --inset: #172640;
+  --line: #263a5e;
+  --ink: #f4eed7;
+  --soft: #9fabc2;
+  --primary: #f4eed7;
+  --on-primary: #0a1322;
+  --accent: #e6b95f;
+  --on-accent: #0a1322;
+  --accent-soft: #2c2d2a;
+  --danger: #ff7a70;
+  --success: #6fdc9a;
+  --brand-2: #ef8a5a;
+  --glow-1: #15294f;
+  --glow-2: #1c2f5c;
+  --shade: 0, 0, 0;
 }
 
 @theme inline {
+  --font-sans: "Raleway", ui-sans-serif, system-ui, sans-serif;
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
   --color-inset: var(--inset);
@@ -44,16 +51,18 @@
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);
   --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
   --color-accent-soft: var(--accent-soft);
   --color-danger: var(--danger);
   --color-success: var(--success);
 }
 
 @theme {
-  --animate-fade-in: fade-in 0.25s ease-out both;
-  --animate-fade-up: fade-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  --animate-scale-in: scale-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  --animate-slide-in: slide-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade-in: fade-in 0.3s ease-out both;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-scale-in: scale-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-slide-in: slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -61,18 +70,23 @@
   }
 
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes scale-in {
-    from { opacity: 0; transform: scale(0.96); }
+    from { opacity: 0; transform: scale(0.94); }
     to { opacity: 1; transform: scale(1); }
   }
 
   @keyframes slide-in {
-    from { opacity: 0; transform: translateX(24px); }
+    from { opacity: 0; transform: translateX(32px); }
     to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
   }
 }
 
@@ -90,12 +104,24 @@
     --tw-inset-ring-shadow: 0 0 #0000;
     --tw-ring-offset-shadow: 0 0 #0000;
   }
+
+  input,
+  textarea,
+  button {
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  html {
+    font-weight: 500;
+    letter-spacing: 0.005em;
+  }
 }
 
 @utility bg-glow {
   background:
-    radial-gradient(900px 480px at 8% -8%, var(--accent-soft), transparent 70%),
-    radial-gradient(700px 420px at 100% 0%, var(--glow-2), transparent 70%),
+    radial-gradient(900px 520px at 6% -10%, var(--glow-1), transparent 70%),
+    radial-gradient(760px 460px at 100% 0%, var(--glow-2), transparent 70%),
     var(--canvas);
 }
 
@@ -104,64 +130,82 @@
 }
 
 @utility bg-sheen {
-  background: linear-gradient(160deg, var(--accent-soft), var(--surface) 70%);
+  background: linear-gradient(160deg, var(--accent-soft), var(--surface) 75%);
 }
 
 @utility lift {
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.28s ease,
     border-color 0.2s ease;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     border-color: var(--accent);
     box-shadow:
-      0 2px 4px rgba(15, 20, 32, 0.06),
-      0 22px 44px rgba(47, 107, 255, 0.18);
+      0 2px 4px rgba(var(--shade), 0.08),
+      0 28px 56px rgba(var(--shade), 0.22);
   }
 }
 
 @utility press {
   transition:
-    transform 0.15s ease,
-    opacity 0.15s ease,
-    background-color 0.15s ease,
-    border-color 0.15s ease;
+    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    opacity 0.22s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
 
   &:active {
-    transform: scale(0.97);
+    transform: translateY(0) scale(0.97);
   }
+}
+
+@utility fade-hover {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 @utility ring-focus {
   transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--soft);
+  }
 
   &:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
+    box-shadow: 0 0 0 4px var(--accent-soft);
   }
 }
 
-@utility delay-1 { animation-delay: 60ms; }
-@utility delay-2 { animation-delay: 120ms; }
-@utility delay-3 { animation-delay: 180ms; }
-@utility delay-4 { animation-delay: 240ms; }
+@utility delay-1 { animation-delay: 80ms; }
+@utility delay-2 { animation-delay: 160ms; }
+@utility delay-3 { animation-delay: 240ms; }
+@utility delay-4 { animation-delay: 320ms; }
 
 @utility shadow-card {
   box-shadow:
-    0 1px 2px rgba(15, 20, 32, 0.06),
-    0 10px 30px rgba(15, 20, 32, 0.07);
+    0 1px 2px rgba(var(--shade), 0.08),
+    0 12px 32px rgba(var(--shade), 0.12);
 }
 
 @utility shadow-page {
   box-shadow:
-    0 2px 4px rgba(15, 20, 32, 0.08),
-    0 18px 48px rgba(15, 20, 32, 0.16);
+    0 2px 4px rgba(var(--shade), 0.12),
+    0 20px 52px rgba(var(--shade), 0.28);
 }
 
 @utility shadow-overlay {
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.45);
 }
