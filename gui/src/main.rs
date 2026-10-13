@@ -23,6 +23,7 @@ fn main() {
     let window = WindowAttributes::default()
         .with_title("Cyrano")
         .with_decorations(false)
+        .with_transparent(true)
         .with_inner_size(LogicalSize::new(1360.0, 860.0));
 
     dioxus_native::launch_cfg(
@@ -50,13 +51,18 @@ fn App() -> Element {
 fn Root(state: AppState) -> Element {
     use_context_provider(|| state);
     let theme = state.theme().class();
+    let frame = if (state.maximized)() {
+        ""
+    } else {
+        "overflow-hidden rounded-2xl border border-line"
+    };
 
     rsx! {
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "preload", href: RALEWAY }
         document::Link { rel: "stylesheet", href: FONTS_CSS }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-        div { class: "{theme} relative h-screen w-screen bg-glow font-sans text-ink antialiased",
+        div { class: "{theme} {frame} relative h-screen w-screen bg-glow font-sans text-ink antialiased",
             Shell {}
             ResizeHandles {}
         }

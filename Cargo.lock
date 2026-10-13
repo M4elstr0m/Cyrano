@@ -246,6 +246,21 @@ dependencies = [
 [[package]]
 name = "anyrender_vello"
 version = "0.6.2"
+dependencies = [
+ "anyrender",
+ "debug_timer",
+ "kurbo 0.12.0",
+ "peniko 0.5.0",
+ "pollster 0.4.0",
+ "rustc-hash 2.1.3",
+ "vello",
+ "wgpu 26.0.1",
+ "wgpu_context",
+]
+
+[[package]]
+name = "anyrender_vello"
+version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6dd9574a872584fa9c7be06ed8be1c4875aeae37e74a567597125f3ec4579bd3"
 dependencies = [
@@ -2567,7 +2582,7 @@ name = "dioxus-native"
 version = "0.7.10"
 dependencies = [
  "anyrender",
- "anyrender_vello",
+ "anyrender_vello 0.6.2",
  "anyrender_vello_cpu",
  "blitz-dom",
  "blitz-html",
@@ -2604,7 +2619,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6d022085082d379df7f453cc465a7cfb75926c5e23d5781dbcbdf5df269840e5"
 dependencies = [
  "anyrender",
- "anyrender_vello",
+ "anyrender_vello 0.6.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "anyrender_vello_cpu",
  "blitz-dom",
  "blitz-html",

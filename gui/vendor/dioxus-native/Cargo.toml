@@ -95,7 +95,7 @@ version = "0.6.2"
 default-features = false
 
 [dependencies.anyrender_vello]
-version = "0.6"
+path = "../anyrender_vello"
 default-features = false
 
 [dependencies.blitz-dom]
