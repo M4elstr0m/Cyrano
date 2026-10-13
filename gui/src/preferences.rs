@@ -24,6 +24,13 @@ pub enum Theme {
 }
 
 impl Theme {
+    pub fn canvas(self) -> &'static str {
+        match self {
+            Theme::Light => "#f4eed7",
+            Theme::Dark => "#0a1322",
+        }
+    }
+
     pub fn class(self) -> &'static str {
         match self {
             Theme::Light => "",

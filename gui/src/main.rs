@@ -90,6 +90,12 @@ fn Root(state: AppState) -> Element {
         div { class: "{theme} {frame} relative h-screen w-screen bg-glow font-sans text-ink antialiased",
             Shell {}
             ResizeHandles {}
+            if let Some(previous) = (state.theme_veil)() {
+                div {
+                    class: "animate-veil absolute inset-0 z-[70]",
+                    style: "background-color: {previous.canvas()}",
+                }
+            }
         }
     }
 }

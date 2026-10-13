@@ -41,7 +41,7 @@
     --animate-fade-up: fade-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
     --animate-scale-in: scale-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
     --animate-slide-in: slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
-    --animate-float: float 6s ease-in-out infinite;
+    --animate-veil: veil 0.5s ease-in-out forwards;
   }
 }
 @layer base {
@@ -252,6 +252,9 @@
   }
   .z-\[60\] {
     z-index: 60;
+  }
+  .z-\[70\] {
+    z-index: 70;
   }
   .container {
     width: 100%;
@@ -470,6 +473,9 @@
   }
   .animate-slide-in {
     animation: var(--animate-slide-in);
+  }
+  .animate-veil {
+    animation: var(--animate-veil);
   }
   .cursor-ew-resize {
     cursor: ew-resize;
@@ -1230,12 +1236,12 @@
     opacity: 1;
   }
 }
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+@keyframes veil {
+  from {
+    opacity: 1;
   }
-  50% {
-    transform: translateY(-6px);
+  to {
+    opacity: 0;
   }
 }
 @layer properties {

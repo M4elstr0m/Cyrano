@@ -37,6 +37,7 @@ pub struct AppState {
     pub flushers: Signal<Vec<Callback<()>>>,
     pub maximized: Signal<bool>,
     pub current_profile: Signal<Option<String>>,
+    pub theme_veil: Signal<Option<Theme>>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -82,6 +83,7 @@ impl AppState {
             flushers: Signal::new(Vec::new()),
             maximized: Signal::new(false),
             current_profile: Signal::new(None),
+            theme_veil: Signal::new(None),
         })
     }
 
@@ -118,7 +120,20 @@ impl AppState {
     }
 
     pub fn set_theme(mut self, theme: Theme) {
+        let previous = self.theme();
+
         self.preferences.write().set_theme(theme);
+
+        if previous != theme {
+            let mut veil = self.theme_veil;
+
+            veil.set(Some(previous));
+
+            spawn(async move {
+                tokio::time::sleep(std::time::Duration::from_millis(520)).await;
+                veil.set(None);
+            });
+        }
 
         if let Err(error) = self.preferences.read().save() {
             self.fail(error);
