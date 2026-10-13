@@ -1,6 +1,6 @@
 use super::session::use_session;
 use crate::{
-    components::{Badge, Button, Dropdown, DropdownItem, Size, Tone, Variant},
+    components::{Badge, Button, Dropdown, DropdownAction, DropdownItem, Size, Tone, Variant},
     state::{ProfileEntry, use_app_state},
 };
 use dioxus::prelude::*;
@@ -72,9 +72,7 @@ pub fn ProfilePicker() -> Element {
                         }
                     }
                 }
-                DropdownItem { onclick: move |_| creating.set(true),
-                    span { class: "font-medium text-accent", "Create a profile" }
-                }
+                DropdownAction { onclick: move |_| creating.set(true), "+ Create a profile" }
             }
         }
     }

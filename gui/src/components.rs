@@ -18,7 +18,7 @@ pub use badge::Badge;
 pub use button::{Button, Size, Variant};
 pub use card::Card;
 pub use confirm_dialog::ConfirmDialog;
-pub use dropdown::{Dropdown, DropdownItem};
+pub use dropdown::{Dropdown, DropdownAction, DropdownItem};
 pub use header::Header;
 pub use logo::Logo;
 pub use modal::Modal;
