@@ -1,6 +1,5 @@
 use crate::{
     components::{Badge, Button, ConfirmDialog, Size, Tone, Variant},
-    route::Route,
     state::use_app_state,
     text::humanize,
 };
@@ -20,7 +19,7 @@ pub fn Home() -> Element {
     entries.sort_by(|a, b| a.1.name.cmp(&b.1.name));
 
     rsx! {
-        div { class: "h-full overflow-y-auto",
+        div { class: "h-full w-full overflow-y-auto",
             div { class: "mx-auto flex max-w-6xl flex-col gap-10 px-8 py-12",
                 div { class: "flex items-end justify-between gap-6",
                     div { class: "flex flex-col gap-2",
@@ -84,18 +83,13 @@ fn TemplateCard(
     assets: Vec<String>,
     ondelete: EventHandler<()>,
 ) -> Element {
-    let navigator = use_navigator();
+    let state = use_app_state();
     let initial: String = name.chars().take(1).flat_map(char::to_uppercase).collect();
 
     rsx! {
         div {
             class: "flex w-80 cursor-pointer flex-col gap-5 rounded-3xl border border-line bg-surface p-6 shadow-card hover:border-accent",
-            onclick: move |_| {
-                navigator
-                    .push(Route::Editor {
-                        template: folder.clone(),
-                    });
-            },
+            onclick: move |_| state.open_template(folder.clone()),
             span { class: "flex size-12 items-center justify-center rounded-2xl bg-accent-soft text-xl font-semibold text-accent",
                 "{initial}"
             }

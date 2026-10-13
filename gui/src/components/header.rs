@@ -1,10 +1,9 @@
 use super::{Button, Size, ThemeToggle, Variant};
-use crate::{route::Route, state::use_app_state};
+use crate::state::use_app_state;
 use dioxus::prelude::*;
 
 #[component]
 pub fn Header() -> Element {
-    let navigator = use_navigator();
     let state = use_app_state();
     let mut settings_open = state.settings_open;
 
@@ -13,9 +12,7 @@ pub fn Header() -> Element {
             button {
                 class: "flex items-center gap-3",
                 r#type: "button",
-                onclick: move |_| {
-                    navigator.push(Route::Home {});
-                },
+                onclick: move |_| state.go_home(),
                 span { class: "flex size-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-on-primary",
                     "C"
                 }

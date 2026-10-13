@@ -2,14 +2,12 @@ use dioxus::{
     native::{Config, LogicalSize, WindowAttributes},
     prelude::*,
 };
-use route::Route;
 use state::AppState;
-use views::Fatal;
+use views::{Fatal, Shell};
 
 mod components;
 mod preferences;
 mod render;
-mod route;
 mod state;
 mod text;
 mod views;
@@ -52,7 +50,7 @@ fn Root(state: AppState) -> Element {
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         div { class: "{theme} h-screen w-screen bg-canvas font-sans text-ink antialiased",
-            Router::<Route> {}
+            Shell {}
         }
     }
 }

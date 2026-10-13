@@ -2,16 +2,12 @@ use super::{
     action_bar::ActionBar, assets_section::AssetsSection, form::CvForm,
     profile_picker::ProfilePicker, session::use_session,
 };
-use crate::{
-    components::{Button, Size, Variant},
-    route::Route,
-};
+use crate::components::{Button, Size, Variant};
 use dioxus::prelude::*;
 
 #[component]
 pub fn SettingsPane() -> Element {
     let session = use_session();
-    let navigator = use_navigator();
     let name = session.template_name();
 
     rsx! {
@@ -26,7 +22,7 @@ pub fn SettingsPane() -> Element {
                     size: Size::Sm,
                     onclick: move |_| {
                         session.persist();
-                        navigator.push(Route::Home {});
+                        session.state.go_home();
                     },
                     "Change"
                 }
