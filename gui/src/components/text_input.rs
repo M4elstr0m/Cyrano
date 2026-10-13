@@ -7,19 +7,16 @@ pub fn TextInput(
     #[props(into)] label: String,
     value: String,
     #[props(default)] placeholder: String,
-    #[props(default)] password: bool,
     #[props(default)] autofocus: bool,
     oninput: EventHandler<String>,
     #[props(default)] onenter: EventHandler<()>,
 ) -> Element {
-    let kind = if password { "password" } else { "text" };
-
     rsx! {
         label { class: "flex flex-col gap-1.5",
             span { class: "text-xs font-medium text-soft", "{label}" }
             input {
                 class: FIELD_CLASS,
-                r#type: kind,
+                r#type: "text",
                 value,
                 placeholder,
                 autofocus,

@@ -205,6 +205,21 @@
   }
 }
 
+@utility ring-within {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: var(--soft);
+  }
+
+  &:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+}
+
 @utility delay-1 { animation-delay: 80ms; }
 @utility delay-2 { animation-delay: 160ms; }
 @utility delay-3 { animation-delay: 240ms; }

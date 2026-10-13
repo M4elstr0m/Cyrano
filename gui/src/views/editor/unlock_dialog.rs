@@ -1,5 +1,5 @@
 use crate::{
-    components::{Button, Modal, TextInput, Tone, Variant},
+    components::{Button, Modal, PasswordInput, Tone, Variant},
     state::{ProfileEntry, use_app_state},
 };
 use cyrano_core::profile::Error;
@@ -58,9 +58,8 @@ pub fn UnlockDialog(
     rsx! {
         Modal { title: "Unlock {entry.name}", onclose,
             p { class: "text-sm text-soft", "Enter the password to decrypt this profile." }
-            TextInput {
+            PasswordInput {
                 label: "Password",
-                password: true,
                 autofocus: true,
                 value: password(),
                 oninput: move |value| password.set(value),

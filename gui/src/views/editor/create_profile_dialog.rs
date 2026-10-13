@@ -1,5 +1,5 @@
 use crate::{
-    components::{Button, Modal, TextInput, Variant},
+    components::{Button, Modal, PasswordInput, TextInput, Variant},
     state::use_app_state,
 };
 use dioxus::prelude::*;
@@ -42,15 +42,13 @@ pub fn CreateProfileDialog(oncreated: EventHandler<PathBuf>, onclose: EventHandl
                 value: name(),
                 oninput: move |value| name.set(value),
             }
-            TextInput {
+            PasswordInput {
                 label: "Password",
-                password: true,
                 value: password(),
                 oninput: move |value| password.set(value),
             }
-            TextInput {
+            PasswordInput {
                 label: "Confirm password",
-                password: true,
                 value: confirmation(),
                 oninput: move |value| confirmation.set(value),
                 onenter: move |_| submit.call(()),
