@@ -7,20 +7,37 @@ mod error;
 pub use error::Error;
 
 const FILENAME: &str = "preferences.toml";
+const APP_QUALIFIER: &str = "com";
+const APP_ORGANIZATION: &str = "M4elstr0m";
+const APP_NAME: &str = "Cyrano";
 
 fn app_directory() -> Result<ProjectDirs, Error> {
-    ProjectDirs::from(
-        crate::APP_QUALIFIER,
-        crate::APP_ORGANIZATION,
-        crate::APP_NAME,
-    )
-    .ok_or(Error::NoHomeDirectory)
+    ProjectDirs::from(APP_QUALIFIER, APP_ORGANIZATION, APP_NAME).ok_or(Error::NoHomeDirectory)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Theme {
+    Light,
+    #[default]
+    Dark,
+}
+
+impl Theme {
+    pub fn class(self) -> &'static str {
+        match self {
+            Theme::Light => "",
+            Theme::Dark => "dark",
+        }
+    }
 }
 
 #[skip_serializing_none]
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(default)]
 pub struct Preferences {
+    theme: Option<Theme>,
+
     profiles_dir: Option<PathBuf>,
 
     templates_dir: Option<PathBuf>,
@@ -49,6 +66,14 @@ impl Preferences {
         std::fs::write(path, toml::to_string_pretty(self)?)?;
 
         Ok(())
+    }
+
+    pub fn theme(&self) -> Theme {
+        self.theme.unwrap_or_default()
+    }
+
+    pub fn set_theme(&mut self, theme: Theme) {
+        self.theme = Some(theme);
     }
 
     pub fn profiles_dir(&self) -> Result<PathBuf, Error> {

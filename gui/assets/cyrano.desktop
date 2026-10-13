@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Cyrano
+Comment=Generate your CV from encrypted profiles and templates
+Exec=cyrano-gui
+Icon=cyrano
+Terminal=false
+Categories=Office;
+StartupWMClass=cyrano
