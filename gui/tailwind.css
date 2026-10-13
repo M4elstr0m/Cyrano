@@ -13,6 +13,8 @@
   --accent-soft: #e6eeff;
   --danger: #d92d3a;
   --success: #17915a;
+  --brand-2: #8b5cf6;
+  --glow-2: #efe9ff;
 }
 
 .dark {
@@ -28,6 +30,8 @@
   --accent-soft: #1b2744;
   --danger: #ff6b76;
   --success: #4ade80;
+  --brand-2: #a78bfa;
+  --glow-2: #1d1838;
 }
 
 @theme inline {
@@ -45,6 +49,33 @@
   --color-success: var(--success);
 }
 
+@theme {
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-scale-in: scale-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-slide-in: slide-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateX(24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+}
+
 @layer base {
   *,
   ::before,
@@ -57,6 +88,64 @@
     --tw-ring-offset-shadow: 0 0 #0000;
   }
 }
+
+@utility bg-glow {
+  background:
+    radial-gradient(900px 480px at 8% -8%, var(--accent-soft), transparent 70%),
+    radial-gradient(700px 420px at 100% 0%, var(--glow-2), transparent 70%),
+    var(--canvas);
+}
+
+@utility bg-brand {
+  background: linear-gradient(135deg, var(--accent), var(--brand-2));
+}
+
+@utility bg-sheen {
+  background: linear-gradient(160deg, var(--accent-soft), var(--surface) 70%);
+}
+
+@utility lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow:
+      0 2px 4px rgba(15, 20, 32, 0.06),
+      0 22px 44px rgba(47, 107, 255, 0.18);
+  }
+}
+
+@utility press {
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@utility ring-focus {
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+}
+
+@utility delay-1 { animation-delay: 60ms; }
+@utility delay-2 { animation-delay: 120ms; }
+@utility delay-3 { animation-delay: 180ms; }
+@utility delay-4 { animation-delay: 240ms; }
 
 @utility shadow-card {
   box-shadow:
