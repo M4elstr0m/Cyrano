@@ -4,6 +4,7 @@ use dioxus::prelude::*;
 use std::{path::PathBuf, time::Duration};
 
 
+mod jobs;
 mod profile;
 
 const AUTOSAVE_DELAY: Duration = Duration::from_millis(700);
