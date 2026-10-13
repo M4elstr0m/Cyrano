@@ -85,7 +85,7 @@ impl Session {
                 template
                     .required_assets
                     .iter()
-                    .map(|asset| asset.name().to_owned())
+                    .map(|asset| asset.to_owned())
                     .collect()
             })
             .unwrap_or_default()

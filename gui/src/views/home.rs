@@ -47,7 +47,7 @@ pub fn Home() -> Element {
                                 assets: template
                                     .required_assets
                                     .iter()
-                                    .map(|asset| asset.name().to_owned())
+                                    .map(|asset| asset.to_owned())
                                     .collect::<Vec<_>>(),
                                 ondelete: {
                                     let dir = dir.to_path_buf();

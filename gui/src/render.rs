@@ -33,7 +33,7 @@ fn render_template(state: AppState, request: &Request) -> Result<RenderedTemplat
     let assets = template
         .required_assets
         .iter()
-        .map(|asset| profile.load_asset(&request.profile_dir, asset.name()))
+        .map(|asset| profile.load_asset(&request.profile_dir, asset))
         .collect::<Result<Vec<Asset>, _>>()?;
 
     Ok(template.render(&request.template_dir, &request.cv, &assets)?)
