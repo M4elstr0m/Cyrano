@@ -24,13 +24,6 @@ pub enum Theme {
 }
 
 impl Theme {
-    pub fn toggled(self) -> Self {
-        match self {
-            Theme::Light => Theme::Dark,
-            Theme::Dark => Theme::Light,
-        }
-    }
-
     pub fn class(self) -> &'static str {
         match self {
             Theme::Light => "",

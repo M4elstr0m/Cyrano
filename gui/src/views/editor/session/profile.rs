@@ -22,7 +22,7 @@ impl Session {
         self.refresh_assets();
     }
 
-    pub fn lock(mut self) {
+    pub fn lock(self) {
         self.persist();
 
         let Some(dir) = self.active_dir() else { return };
@@ -37,7 +37,7 @@ impl Session {
         self.clear();
     }
 
-    pub fn delete_active(mut self) {
+    pub fn delete_active(self) {
         let Some(dir) = self.active_dir() else { return };
         let mut profiles = self.state.profiles;
         let result = profiles.write().delete_profile(&dir);

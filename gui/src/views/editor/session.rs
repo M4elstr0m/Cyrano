@@ -127,10 +127,10 @@ impl Session {
 
         *profile.data_mut() = draft.clone();
 
-        if profile.is_modified().unwrap_or(true) {
-            if let Err(error) = profile.save(dir) {
-                self.state.fail(error);
-            }
+        if profile.is_modified().unwrap_or(true)
+            && let Err(error) = profile.save(dir)
+        {
+            self.state.fail(error);
         }
     }
 }
