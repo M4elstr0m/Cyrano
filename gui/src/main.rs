@@ -14,6 +14,11 @@ mod views;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
+const FONTS_CSS: Asset = asset!("/assets/fonts.css");
+const RALEWAY: Asset = asset!(
+    "/assets/fonts/Raleway.ttf",
+    AssetOptions::builder().with_hash_suffix(false)
+);
 
 fn main() {
     let window = WindowAttributes::default()
@@ -48,6 +53,8 @@ fn Root(state: AppState) -> Element {
 
     rsx! {
         document::Link { rel: "icon", href: FAVICON }
+        document::Link { rel: "preload", href: RALEWAY }
+        document::Link { rel: "stylesheet", href: FONTS_CSS }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         div { class: "{theme} h-screen w-screen bg-glow font-sans text-ink antialiased",
             Shell {}

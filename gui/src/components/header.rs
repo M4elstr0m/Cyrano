@@ -1,4 +1,4 @@
-use super::{Button, Size, ThemeToggle, Variant};
+use super::{Button, Logo, Size, ThemeToggle, Variant};
 use crate::state::use_app_state;
 use dioxus::prelude::*;
 
@@ -13,10 +13,8 @@ pub fn Header() -> Element {
                 class: "flex items-center gap-3",
                 r#type: "button",
                 onclick: move |_| state.go_home(),
-                span { class: "flex size-9 items-center justify-center rounded-xl bg-brand text-sm font-bold text-white shadow-card",
-                    "C"
-                }
-                span { class: "text-base font-semibold tracking-tight", "Cyrano" }
+                Logo { class: "size-10" }
+                span { class: "text-lg font-bold tracking-tight", "Cyrano" }
             }
             div { class: "flex items-center gap-3",
                 ThemeToggle {}
