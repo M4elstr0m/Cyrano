@@ -133,44 +133,56 @@
   background: linear-gradient(160deg, var(--accent-soft), var(--surface) 75%);
 }
 
-@utility lift {
+@utility grow {
   transition:
-    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.28s ease,
-    border-color 0.2s ease;
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: scale(1.025);
     border-color: var(--accent);
-    box-shadow:
-      0 2px 4px rgba(var(--shade), 0.08),
-      0 28px 56px rgba(var(--shade), 0.22);
+  }
+
+  &:active {
+    transform: scale(0.99);
   }
 }
 
 @utility press {
   transition:
-    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
-    background-color 0.22s ease,
-    color 0.22s ease,
+    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
     border-color 0.22s ease,
-    box-shadow 0.22s ease,
     opacity 0.22s ease;
 
   &:hover {
-    transform: translateY(-1px);
+    transform: scale(1.05);
   }
 
   &:active {
-    transform: translateY(0) scale(0.97);
+    transform: scale(0.95);
+  }
+}
+
+@utility nudge {
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 0.2s ease;
+
+  &:hover {
+    transform: translateX(4px);
+    color: var(--accent);
   }
 }
 
 @utility fade-hover {
   transition:
-    background-color 0.2s ease,
+    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
     color 0.2s ease,
     border-color 0.2s ease;
+
+  &:hover {
+    color: var(--accent);
+  }
 }
 
 @utility ring-focus {

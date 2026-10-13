@@ -91,7 +91,7 @@ fn TemplateCard(
 
     rsx! {
         div {
-            class: "animate-fade-up lift flex w-80 cursor-pointer flex-col rounded-[28px] border border-line bg-surface p-4 shadow-card",
+            class: "animate-fade-up grow flex w-80 cursor-pointer flex-col rounded-[28px] border border-line bg-surface p-4 shadow-card",
             onclick: move |_| state.open_template(folder.clone()),
             div { class: "bg-sheen flex h-44 items-center justify-center rounded-2xl border border-line",
                 div { class: "flex h-32 w-24 flex-col gap-2 rounded-lg bg-white p-3 shadow-page",

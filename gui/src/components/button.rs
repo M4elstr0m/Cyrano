@@ -12,14 +12,10 @@ pub enum Variant {
 impl Variant {
     fn class(self) -> &'static str {
         match self {
-            Variant::Primary => {
-                "bg-primary text-on-primary shadow-card hover:bg-accent hover:text-on-accent"
-            }
-            Variant::Secondary => {
-                "border border-line bg-surface text-ink hover:border-ink hover:bg-inset"
-            }
-            Variant::Ghost => "text-soft hover:bg-inset hover:text-ink",
-            Variant::Danger => "bg-danger text-white hover:opacity-85",
+            Variant::Primary => "bg-primary text-on-primary shadow-card",
+            Variant::Secondary => "border border-line bg-surface text-ink hover:border-accent",
+            Variant::Ghost => "text-soft hover:text-ink",
+            Variant::Danger => "bg-danger text-white",
         }
     }
 }

@@ -52,7 +52,7 @@ pub fn ProfilePicker() -> Element {
             }
             Dropdown {
                 trigger: rsx! {
-                    div { class: "flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-inset px-4 py-3 hover:border-accent",
+                    div { class: "fade-hover flex w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border border-line bg-surface px-4 py-3 hover:border-accent",
                         span { class: "truncate text-sm font-medium", "{label}" }
                         span { class: "text-xs text-soft", "Change" }
                     }

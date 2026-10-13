@@ -330,21 +330,33 @@
   .shrink-0 {
     flex-shrink: 0;
   }
-  .lift {
-    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease, border-color 0.2s ease;
+  .grow {
+    flex-grow: 1;
+  }
+  .grow {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
     &:hover {
-      transform: translateY(-5px);
+      transform: scale(1.025);
       border-color: var(--accent);
-      box-shadow: 0 2px 4px rgba(var(--shade), 0.08), 0 28px 56px rgba(var(--shade), 0.22);
+    }
+    &:active {
+      transform: scale(0.99);
+    }
+  }
+  .nudge {
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease;
+    &:hover {
+      transform: translateX(4px);
+      color: var(--accent);
     }
   }
   .press {
-    transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.22s ease, opacity 0.22s ease;
     &:hover {
-      transform: translateY(-1px);
+      transform: scale(1.05);
     }
     &:active {
-      transform: translateY(0) scale(0.97);
+      transform: scale(0.95);
     }
   }
   .animate-fade-in {
@@ -647,6 +659,12 @@
   .break-all {
     word-break: break-all;
   }
+  .fade-hover {
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease, border-color 0.2s ease;
+    &:hover {
+      color: var(--accent);
+    }
+  }
   .text-\[\#2f6bff\] {
     color: #2f6bff;
   }
@@ -707,9 +725,6 @@
   .bg-sheen {
     background: linear-gradient(160deg, var(--accent-soft), var(--surface) 75%);
   }
-  .fade-hover {
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
   .hover\:border-accent {
     &:hover {
       @media (hover: hover) {
@@ -717,45 +732,10 @@
       }
     }
   }
-  .hover\:border-ink {
-    &:hover {
-      @media (hover: hover) {
-        border-color: var(--ink);
-      }
-    }
-  }
-  .hover\:bg-accent {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--accent);
-      }
-    }
-  }
-  .hover\:bg-inset {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--inset);
-      }
-    }
-  }
   .hover\:text-ink {
     &:hover {
       @media (hover: hover) {
         color: var(--ink);
-      }
-    }
-  }
-  .hover\:text-on-accent {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--on-accent);
-      }
-    }
-  }
-  .hover\:opacity-85 {
-    &:hover {
-      @media (hover: hover) {
-        opacity: 85%;
       }
     }
   }
