@@ -1,1 +1,75 @@
 @import "tailwindcss";
+
+:root {
+  --canvas: #eef1f6;
+  --surface: #ffffff;
+  --inset: #f3f5f9;
+  --line: #e2e6ee;
+  --ink: #0f1420;
+  --soft: #5b6475;
+  --primary: #0f1420;
+  --on-primary: #ffffff;
+  --accent: #2f6bff;
+  --accent-soft: #e6eeff;
+  --danger: #d92d3a;
+  --success: #17915a;
+}
+
+.dark {
+  --canvas: #090b10;
+  --surface: #131620;
+  --inset: #1a1e29;
+  --line: #262b38;
+  --ink: #eef1f7;
+  --soft: #98a1b3;
+  --primary: #f2f4f8;
+  --on-primary: #0f1420;
+  --accent: #6c9bff;
+  --accent-soft: #1b2744;
+  --danger: #ff6b76;
+  --success: #4ade80;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-inset: var(--inset);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    --tw-border-style: solid;
+    --tw-shadow: 0 0 #0000;
+    --tw-inset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-inset-ring-shadow: 0 0 #0000;
+    --tw-ring-offset-shadow: 0 0 #0000;
+  }
+}
+
+@utility shadow-card {
+  box-shadow:
+    0 1px 2px rgba(15, 20, 32, 0.06),
+    0 10px 30px rgba(15, 20, 32, 0.07);
+}
+
+@utility shadow-page {
+  box-shadow:
+    0 2px 4px rgba(15, 20, 32, 0.08),
+    0 18px 48px rgba(15, 20, 32, 0.16);
+}
+
+@utility shadow-overlay {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
