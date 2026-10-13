@@ -1922,6 +1922,7 @@ dependencies = [
  "dioxus-native 0.7.10",
  "directories",
  "hayro",
+ "image",
  "opener",
  "rfd",
  "serde",

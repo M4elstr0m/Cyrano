@@ -3,6 +3,10 @@ use dioxus::prelude::*;
 use dioxus_native::{Config, LogicalSize, WindowAttributes};
 use state::AppState;
 use views::{Fatal, Shell};
+use winit::{
+    platform::{wayland::WindowAttributesExtWayland, x11::WindowAttributesExtX11},
+    window::Icon,
+};
 
 mod components;
 mod preferences;
@@ -19,12 +23,24 @@ const RALEWAY: Asset = asset!(
     AssetOptions::builder().with_hash_suffix(false)
 );
 
+fn window_icon() -> Option<Icon> {
+    let rgba = image::load_from_memory(include_bytes!("../assets/logo-192.png"))
+        .ok()?
+        .into_rgba8();
+    let (width, height) = rgba.dimensions();
+
+    Icon::from_rgba(rgba.into_raw(), width, height).ok()
+}
+
 fn main() {
     let window = WindowAttributes::default()
         .with_title("Cyrano")
+        .with_window_icon(window_icon())
         .with_decorations(false)
         .with_transparent(true)
         .with_inner_size(LogicalSize::new(1360.0, 860.0));
+    let window = WindowAttributesExtWayland::with_name(window, "cyrano", "cyrano");
+    let window = WindowAttributesExtX11::with_name(window, "cyrano", "cyrano");
 
     dioxus_native::launch_cfg(
         App,
@@ -51,6 +67,15 @@ fn App() -> Element {
 fn Root(state: AppState) -> Element {
     use_context_provider(|| state);
     let theme = state.theme().class();
+
+    use_effect(move || {
+        let title = match state.current_profile.read().as_deref() {
+            Some(name) => format!("Cyrano - {name}"),
+            None => "Cyrano".to_owned(),
+        };
+
+        document::document().set_title(title);
+    });
     let frame = if (state.maximized)() {
         ""
     } else {
