@@ -1,3 +1,4 @@
+use components::ResizeHandles;
 use dioxus::prelude::*;
 use dioxus_native::{Config, LogicalSize, WindowAttributes};
 use state::AppState;
@@ -55,8 +56,9 @@ fn Root(state: AppState) -> Element {
         document::Link { rel: "preload", href: RALEWAY }
         document::Link { rel: "stylesheet", href: FONTS_CSS }
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
-        div { class: "{theme} h-screen w-screen bg-glow font-sans text-ink antialiased",
+        div { class: "{theme} relative h-screen w-screen bg-glow font-sans text-ink antialiased",
             Shell {}
+            ResizeHandles {}
         }
     }
 }

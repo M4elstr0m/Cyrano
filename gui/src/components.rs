@@ -12,6 +12,7 @@ mod text_input;
 mod theme_toggle;
 mod toasts;
 mod tone;
+mod window_controls;
 
 pub use badge::Badge;
 pub use button::{Button, Size, Variant};
@@ -27,3 +28,4 @@ pub use text_input::TextInput;
 pub use theme_toggle::ThemeToggle;
 pub use toasts::Toasts;
 pub use tone::Tone;
+pub use window_controls::{DragRegion, ResizeHandles, WindowControls};

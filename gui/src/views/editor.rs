@@ -33,6 +33,7 @@ fn Workspace(dir: PathBuf) -> Element {
     let state = use_app_state();
     let session = use_context_provider(|| Session::new(state, dir));
     use_autosave(session);
+    use_hook(move || state.on_quit(Callback::new(move |_| session.persist())));
 
     rsx! {
         div { class: "flex h-full w-full",

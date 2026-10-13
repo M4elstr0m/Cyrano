@@ -34,6 +34,7 @@ pub struct AppState {
     pub settings_open: Signal<bool>,
     pub screen: Signal<Screen>,
     pub opened: Signal<Vec<String>>,
+    pub flushers: Signal<Vec<Callback<()>>>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -76,6 +77,7 @@ impl AppState {
             settings_open: Signal::new(false),
             screen: Signal::new(Screen::Home),
             opened: Signal::new(Vec::new()),
+            flushers: Signal::new(Vec::new()),
         })
     }
 
@@ -85,6 +87,18 @@ impl AppState {
         }
 
         self.screen.set(Screen::Editor(folder));
+    }
+
+    pub fn on_quit(mut self, callback: Callback<()>) {
+        self.flushers.write().push(callback);
+    }
+
+    pub fn quit(self) {
+        for callback in self.flushers.read().iter() {
+            callback.call(());
+        }
+
+        std::process::exit(0);
     }
 
     pub fn go_home(mut self) {
