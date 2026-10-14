@@ -33,6 +33,11 @@ fn Workspace(dir: PathBuf) -> Element {
     let state = use_app_state();
     let session = use_context_provider(|| Session::new(state, dir));
     use_autosave(session);
+    use_effect(move || {
+        if session.is_current() {
+            spawn(async move { session.sync() });
+        }
+    });
     use_hook(move || state.on_quit(Callback::new(move |_| session.persist())));
 
     let mut drag = session.drag;

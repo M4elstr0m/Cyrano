@@ -1,4 +1,4 @@
-use crate::state::{AppState, ProfileEntry};
+use crate::state::{AppState, ProfileEntry, Screen};
 use cyrano_core::cv_data::CvData;
 use dioxus::prelude::*;
 use std::{path::PathBuf, time::Duration};
@@ -121,7 +121,19 @@ impl Session {
         }
     }
 
+    pub fn is_current(&self) -> bool {
+        let Screen::Editor(folder) = (self.state.screen)() else {
+            return false;
+        };
+
+        self.state.template_dir(&folder).as_ref() == Some(&*self.template_dir.read())
+    }
+
     pub fn persist(self) {
+        if !self.is_current() {
+            return;
+        }
+
         let (Ok(active), Ok(draft)) = (self.active.try_read(), self.draft.try_read()) else {
             return;
         };
