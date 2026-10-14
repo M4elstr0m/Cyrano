@@ -3,6 +3,7 @@ name = "cyrano-gui"
 version = "0.1.0"
 authors = ["M4elstr0m <112475171+M4elstr0m@users.noreply.github.com>"]
 edition = "2024"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
