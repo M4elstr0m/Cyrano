@@ -2,9 +2,10 @@
 
 Your favorite CV writer using HTML templates! Your CVs made with panache, using Cyrano!
 
+![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=M4elstr0m.cyrano&left_text=Visitors&right_color=orange)
 ![Stars Badge](https://img.shields.io/github/stars/M4elstr0m/cyrano?style=flat&color=yellow&label=Stars)
 ![License Badge](https://img.shields.io/badge/License-MIT-lightgrey)
-![Rust Badge](https://img.shields.io/badge/Rust-v1.98.0-orange?logo=rust&logoColor=white)
+![Rust Badge](https://img.shields.io/badge/Rust-v1.98.0-F67200?logo=rust&logoColor=white)
 ![Dioxus Badge](https://img.shields.io/badge/Dioxus-v0.7-132135)
 
 Please star & share this repository if you find it useful :star:
@@ -23,7 +24,10 @@ Please star & share this repository if you find it useful :star:
 - [Roadmap](#roadmap-world_map)
 - [Credits](#credits-newspaper)
 
-> [!CAUTION] AI Usage Notice
+> [!CAUTION]
+>
+> ### AI Usage Notice
+> 
 > AI was used **only** on the `gui/` package. **Never** on `core/`.
 > 
 > My main goal was to spend time doing a clean backend without using AI. **I am not a designer**.
