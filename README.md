@@ -23,6 +23,14 @@ Please star & share this repository if you find it useful :star:
 - [Roadmap](#roadmap-world_map)
 - [Credits](#credits-newspaper)
 
+> [!CAUTION] AI Usage Notice
+> AI was used **only** on the `gui/` package. **Never** on `core/`.
+> 
+> My main goal was to spend time doing a clean backend without using AI. **I am not a designer**.
+>
+> Therefore, this README is hand-made.
+> The low amount of commits on `main` is explained by the amount of [pull requests](https://github.com/M4elstr0m/cyrano/pulls) I created.
+
 ## Features
 
 - **Live preview**: edit your data in a form and see the rendered CV next to it.
