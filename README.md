@@ -33,7 +33,10 @@ Please star & share this repository if you find it useful :star:
 
 ## Installation :computer:
 
-> [!CAUTION]
+> [!NOTE]
+> Want to run Cyrano's development environment? Go and check the [Contributing Guidelines](./CONTRIBUTING.md)!
+
+> [!IMPORTANT]
 > Cyrano requires a Chromium (Chrome) binary available on your `PATH` for PDF conversion.
 
 Download an executable from the [release tab](https://github.com/M4elstr0m/cyrano/releases).
@@ -84,3 +87,5 @@ Template creation remains really free, you can have a complete control over your
 - [hayro](https://github.com/LaurenzV/hayro) for PDF rasterisation
 - [Mestra](https://github.com/M4elstr0m/Mestra) for PDF conversion
 - [Raleway](https://fonts.google.com/specimen/Raleway) typeface
+
+[Third Party licenses](./THIRD_PARTY.md)
