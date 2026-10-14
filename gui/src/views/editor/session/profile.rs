@@ -30,6 +30,27 @@ impl Session {
         self.refresh_assets();
     }
 
+    pub fn sync(mut self) {
+        let Some(dir) = self.active.peek().clone() else {
+            return;
+        };
+
+        let data = self
+            .state
+            .profiles
+            .peek()
+            .unlocked(&dir)
+            .map(|profile| profile.data().clone());
+
+        match data {
+            Some(data) => {
+                self.draft.set(data);
+                self.refresh_assets();
+            }
+            None => self.clear(),
+        }
+    }
+
     pub fn lock(self) {
         self.persist();
 

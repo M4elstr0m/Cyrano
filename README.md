@@ -72,7 +72,7 @@ Template creation remains really free, you can have a complete control over your
 - [x] Template system with PDF conversion and required assets
 - [x] Native desktop GUI with live preview
 - [x] Light and dark themes
-- [ ] CvData does not save when switching from a template to another, which leads to data loss
+- [x] CvData does not save when switching from a template to another, which leads to data loss
 - [ ] Fix slow memory growth during heavy preview use
 - [ ] Default templates
 - [ ] :crab: v1.0.0 
