@@ -72,14 +72,15 @@ Template creation remains really free, you can have a complete control over your
 - [x] Template system with PDF conversion and required assets
 - [x] Native desktop GUI with live preview
 - [x] Light and dark themes
-- [ ] Fix slow memory growth during heavy preview use
 - [ ] CvData does not save when switching from a template to another, which leads to data loss
-- [ ] v1.0.0
+- [ ] Fix slow memory growth during heavy preview use
 - [ ] Default templates
+- [ ] :crab: v1.0.0 
 
 ## Credits :newspaper:
 
 - [Dioxus](https://dioxuslabs.com/) and [Blitz](https://github.com/DioxusLabs/blitz) for the native renderer
 - [Tera](https://keats.github.io/tera/) for templating
 - [hayro](https://github.com/LaurenzV/hayro) for PDF rasterisation
+- [Mestra](https://github.com/M4elstr0m/Mestra) for PDF conversion
 - [Raleway](https://fonts.google.com/specimen/Raleway) typeface
