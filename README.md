@@ -10,7 +10,8 @@ Your favorite CV writer using HTML templates! Your CVs made with panache, using 
 Please star & share this repository if you find it useful :star:
 
 <p align="center">
-  <img src="gui/assets/logo-192.png" alt="Cyrano" width="192" height="192">
+  <img src="gui/assets/showcase-light.png" alt="Cyrano - Homepage - Light" width="500">
+  <img src="gui/assets/showcase-dark.png" alt="Cyrano - Homepage - Dark" width="500">
 </p>
 
 ## Table of Contents
